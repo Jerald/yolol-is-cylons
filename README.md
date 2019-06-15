@@ -15,3 +15,8 @@ This repo contains a number of folders for separating information into different
 Anyone is free to contribute to the information held here. We welcome anything that works towards increasing the sum of knowledge available to the community on how to use yolol to its full potential.
 
 Most of the information should be written in the markdown format (.md files) which includes this very readme! Github uses markdown as an easy way to write rich text without much hassle. Github even has their own flavour of markdown, appropriately called Github Flavoured Markdown (GFM), which has a [guide available](https://guides.github.com/features/mastering-markdown/).
+
+## What's with the name? What's yolol-is-cylons mean?
+The Cylons are a race of sentient robots and the primary antagonists of the show [Battlestar Galactica](https://en.wikipedia.org/wiki/Battlestar_Galactica_(2004_TV_series)). A key plot point in the show is that any and all networked computers are dangerous due to the Cylon's overwhelming ability to infiltrate the networks and any connected systems. Yolol has the potential to eventually provide incredibly powerful networked systems with the ability to control nearly all devices in the game, remarkably reminiscent of Cylons. Also it's game about spaceships like Battlestar Galactica and we play robots which are vaguely similar to Cylons.
+
+Basically, the name is referencing the goal of using yolol to use computers in Starbase like the Cylons do in Battlestar Galactica. It's also just cool, so there's that.
