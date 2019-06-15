@@ -6,6 +6,11 @@ Yolol is a simple scripting language created for the upcoming game [Starbase](ht
 ## Goals
 The goal is for this to be a community collection of yolol information ranging from general usage of yolol, to answers of developer questions, to standard practices for yolol, and even to what we hope can eventually be achieved with the language.
 
+## Folders
+This repo contains a number of folders for separating information into different groups. Each folder has a specific use case which is explained below.
+- **/information/:** for general information about yolol and how it can be used
+- **/thinktank/:** used to hold ideas, concepts, and suggestions for new work with yolol
+
 ## How to contribute
 Anyone is free to contribute to the information held here. We welcome anything that works towards increasing the sum of knowledge available to the community on how to use yolol to its full potential.
 
