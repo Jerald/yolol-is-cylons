@@ -1,0 +1,35 @@
+\documentclass[]{scrartcl}
+\usepackage{amsmath}
+
+\newcommand{\pow}[1]{\ensuremath{^{#1}}}
+\renewcommand{\star}{\ensuremath{^*}}
+\newcommand{\plus}{\ensuremath{^+}}
+\newcommand{\pipe}{\ensuremath{|\text{ }}}
+
+\begin{document}
+	\section*{Grammar}
+	\begin{tabular}{ll}
+		chip &:= line\pow{20} \\
+		line &:= multipleStatements \pipe comment \pipe empty \\
+		multipleStatements &:= singleStatement ('\textvisiblespace' singleStatement)\star \\
+		singleStatement &:= ifStatement \pipe varAssignment \pipe expression \pipe goto \\
+		ifStatement &:= 'if\textvisiblespace' expression '\textvisiblespace then\textvisiblespace' multipleStatements ('\textvisiblespace else\textvisiblespace' \\ & multipleStatements)? '\textvisiblespace end' \\
+		varAssignment &:= var '=' expression \pipe arithmeticalAssignment \\
+		var &:= ':' varName \pipe varName \\
+		varName &:= alphabeticalChar alphanumericalChar \star \\
+		alphabeticalChar &:= \{'a' - 'z', 'A' - 'Z'\} \\
+		alphanumericalChar &:= alphabeticalChar $\cup$ numericalChar \\
+		numericalChar &:= \{'0' - '9'\} \\
+		arithmeticalAssignment & := var arithmeticalOperator '=' expression \\
+		expression &:= '(' expression ')' \pipe var \pipe const \pipe arithmeticOperation \pipe logicalOperation \\
+		const &:= ' " ' everyChar \plus ' " ' \pipe number \\
+		number &:= (-)? numericalChar \plus ('.' numericalChar$^{1 - 4}$)? \\
+		everyChar &:= whatever the supported charset supports \\
+		arithmeticOperation &:= expression arithmeticOperator expression \pipe arithmeticKeyword expression \\ & \pipe expression '!' \\
+		arithmeticOperator &:= '$+$' \pipe '$-$' \pipe '$*$' \pipe '$/$' \pipe '$\%$' \\
+		arithmeticKeyword &:= 'ABS' \pipe 'SQRT' \pipe 'SIN' \pipe 'COS' \pipe 'TAN' \pipe 'ARCSIN' \pipe 'ARCCOS' \\ & \pipe 'ARCTAN' \\
+		logicalOperation &:= expression logicalOperation expression \\
+		logicalOperator &:= '$<$' \pipe '$>$' \pipe '$<=$' \pipe '$>=$' \pipe '$!=$' \pipe '$==$' \\
+		comment & := '$\setminus \setminus$' everyChar \star \\
+	\end{tabular}
+\end{document}
