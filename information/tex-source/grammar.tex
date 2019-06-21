@@ -22,7 +22,7 @@
 		numericalChar &:= \{'0' - '9'\} \\
 		arithmeticalAssignment & := var arithmeticalOperator '=' expression \\
 		expression &:= '(' expression ')' \pipe var \pipe const \pipe arithmeticOperation \pipe logicalOperation \\
-		const &:= ' " ' everyChar \plus ' " ' \pipe number \\
+		const &:= ' " ' everyChar \star ' " ' \pipe number \\
 		number &:= (-)? numericalChar \plus ('.' numericalChar$^{1 - 4}$)? \\
 		everyChar &:= whatever the supported charset supports \\
 		arithmeticOperation &:= expression arithmeticOperator expression \pipe arithmeticKeyword expression \\ & \pipe expression '!' \\
@@ -30,6 +30,6 @@
 		arithmeticKeyword &:= 'ABS' \pipe 'SQRT' \pipe 'SIN' \pipe 'COS' \pipe 'TAN' \pipe 'ARCSIN' \pipe 'ARCCOS' \\ & \pipe 'ARCTAN' \\
 		logicalOperation &:= expression logicalOperation expression \\
 		logicalOperator &:= '$<$' \pipe '$>$' \pipe '$<=$' \pipe '$>=$' \pipe '$!=$' \pipe '$==$' \\
-		comment & := '$\setminus \setminus$' everyChar \star \\
+		comment & := '$//$' everyChar \star \\
 	\end{tabular}
 \end{document}
