@@ -8,9 +8,8 @@ multipleStatements |:= singleStatement ('\_' singleStatement)^\*
 ifStatement |:= 'if\_' expression '\_then\_' multipleStatements ('\_else\_' multipleStatements)? '\_end'
 varAssignment |:= var '=' expression \| arithmeticalAssignment
 var |:= (':')? varname
-varname |:= alphabeticalChar alphanumericalChar^\*
-alphabeticalChar |:= \{'a' - 'z', 'A' - 'Z'\}
-alphanumericalChar |:= alphabeticalChar \ / numericalChar
+varname |:= alphanumericalChar^+
+alphanumericalChar |:= \{'a' - 'z', 'A' - 'Z'\} \ / numericalChar
 numericalChar |:= \{'0' - '9'\}
 arithmeticalAssignment |:= var arithmeticOperator '=' expression
 expression |:= '('expression')' \| var \| const \| arithmeticOperation \| logicalOperation
