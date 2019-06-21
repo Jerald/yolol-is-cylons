@@ -21,5 +21,5 @@ arithmeticOperator |:= '+' \| '-' \| '\*' \| '/' \| '%'
 arithmeticKeyword |:= 'ASB' \| 'SQRT' \| 'SIN' \| 'COS' \| 'TAN' \| 'ARCSIN' \| 'ARCCOS' \| 'ARCTAN'
 logicalOperation |:= expressoin logicalOperator expression
 logicalOperator |:= '<' \| '>' \| '<=' \| '>=' \| '!=' \| '=='
-goto |:= 'goto' ({'1' - '20'} \| var)
+goto |:= 'goto' expression
 comment |:= '//' everyChar^\*

@@ -1,5 +1,5 @@
 ### variables
-- named with alphanumeric letters (no leading numbers)
+- named with alphanumeric letters (leading numbers are possible too)
 - can contain only a string or a fixed point decimal number (4 digit precision)
 - external variables have a leading `:`
 ```
@@ -49,6 +49,11 @@ A == B | Equal to | returns 1 if String A is equal to String B, 0 otherwise
 
 ### goto
 - `goto x` the script will continue at line `x`
+- `x` can be a constant or a expression, the content of `x` will be adjusted to fit the restrains
+```
+goto 1/2 // evaluates to goto 1
+goto 21 // evaluates to goto 20
+```
 - if the goto is located in a line with multiple statements, everything after the goto statement will be skipped in case of the execution of the goto
 
 ### if-else
@@ -59,5 +64,5 @@ if condition then ifItIsTrue else ifItIsFalse end
 ```
 
 ### Comments
-- standart `// comment` comments are available
+- standard `// comment` comments are available
 - comments are not excluded from the 70 character per line limit
