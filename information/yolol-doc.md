@@ -1,3 +1,5 @@
+## Yolol doc
+
 ### variables
 - named with alphanumeric letters (leading numbers are possible too)
 - can contain only a string or a fixed point decimal number (4 digit precision)
@@ -49,10 +51,11 @@ A == B | Equal to | returns 1 if String A is equal to String B, 0 otherwise
 
 ### goto
 - `goto x` the script will continue at line `x`
-- `x` can be a constant or a expression, the content of `x` will be adjusted to fit the restrains
+- `x` can be a constant or a expression, the content of `x` will be adjusted to fit the restrains [Source](markdown-sources/yolol_goto_source.png) unconfirmed
 ```
 goto 1/2 // evaluates to goto 1
 goto 21 // evaluates to goto 20
+goto 1+:externalData // would work too
 ```
 - if the goto is located in a line with multiple statements, everything after the goto statement will be skipped in case of the execution of the goto
 
