@@ -51,7 +51,7 @@ A == B | Equal to | returns 1 if String A is equal to String B, 0 otherwise
 
 ### goto
 - `goto x` the script will continue at line `x`
-- `x` can be a constant or a expression, the content of `x` will be adjusted to fit the restrains [Source](markdown-sources/yolol_goto_source.png) unconfirmed
+- `x` can be a constant or a expression, the content of `x` will be adjusted to fit the restrains [Source](https://imgur.com/a/wydWW4u) unconfirmed
 ```
 goto 1/2 // evaluates to goto 1
 goto 21 // evaluates to goto 20
