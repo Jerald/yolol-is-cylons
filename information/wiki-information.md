@@ -7,7 +7,7 @@ variableName = 1.2345 variableName = "HelloWorld" :externalVariable = "Hi"
 ```
 
 ### basic arithmetic / assignment operations
-Operation | Numeric operation | String operation
+|Operation | Numeric operation | String operation|
 |---|---|---|
 A + B | Addition | String concatination of A and B
 A - B | Subtraction | last appearance of B in A is removed from A
@@ -20,8 +20,8 @@ A\-\- | PorstDecrement | Removes the last character of A, Runtime Error when A =
 A = B | Assignment (A to the value of B) | Assignment
 A += B | A = A + B | same
 A -= B | A = A - B | same
-A *= B | A = A * B | Runtime Error
-A /= B | A = A / B | Runtime Error
+A \*= B | A = A \* B | Runtime Error
+A /= B | A = A / B | Runtime Errorm
 A %= B | A = A % B | Runtime Error
 ABS A | returns \|A\| | Runtime Error
 A! | Factorial | Runtime Error
@@ -30,11 +30,11 @@ SIN A | Sine of A (degrees) | Runtime Error
 COS A | Cosine of A (degrees) | Runtime Error
 TAN A | Tangent of A (degrees) | Runtime Error
 ARCSIN A | Inverse sine of A | Runtime Error
-ARCCOS A | Inverse cosine of A | Runtime Error 
+ARCCOS A | Inverse cosine of A | Runtime Error
 ARCTAN A | Inverse tanent of A | Runtime Error
 
 ### Logical operators
-Operation | Numeric operatoin | String operation
+|Operation | Numeric operation | String operation |
 |---|---|---|
 A < B | less than | returns 1 if A is first in alphabetical order, 0 otherwise
 A > B | greater than | returns 0 if A is first in alphabetical order, 1 otherwise

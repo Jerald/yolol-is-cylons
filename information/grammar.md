@@ -1,0 +1,25 @@
+# Yolo grammar
+
+|Keyword |Definition |
+|--|--|
+chip |:= line^(20)  
+line |:= multipleStatements \| comment \| empty
+multipleStatements |:= singleStatement ('\_' singleStatement)^\*
+ifStatement |:= 'if\_' expression '\_then\_' multipleStatements ('\_else\_' multipleStatements)? '\_end'
+varAssignment |:= var '=' expression \| arithmeticalAssignment
+var |:= (':')? varname
+varname |:= alphabeticalChar alphanumericalChar^\*
+alphabeticalChar |:= \{'a' - 'z', 'A' - 'Z'\}
+alphanumericalChar |:= alphabeticalChar \ / numericalChar
+numericalChar |:= \{'0' - '9'\}
+arithmeticalAssignment |:= var arithmeticOperator '=' expression
+expression |:= '('expression')' \| var \| const \| arithmeticOperation \| logicalOperation
+const |:= '"' everyChar^\* '"' \| number
+number |:= (-)? numericalChar^+ ('.'numericalChar^+)?
+everyChar |:= whatever the charset supports
+arithmeticOperation |:= expression arithmeticOperator expression \| arithmeticKeyword expression \| expression '!'
+arithmeticOperator |:= '+' \| '-' \| '\*' \| '/' \| '%'
+arithmeticKeyword |:= 'ASB' \| 'SQRT' \| 'SIN' \| 'COS' \| 'TAN' \| 'ARCSIN' \| 'ARCCOS' \| 'ARCTAN'
+logicalOperation |:= expressoin logicalOperator expression
+logicalOperator |:= '<' \| '>' \| '<=' \| '>=' \| '!=' \| '=='
+comment |:= '//' everyChar^\*
