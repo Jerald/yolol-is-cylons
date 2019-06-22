@@ -20,6 +20,7 @@ Due to the fact that a looplock constantly execute its condition line, it may ha
 > **Example - Inversed**
 >
 > <sup>Depending on the condition, this method can be shorter than a normal Looplock</sup>
+>
 > | | Chip |
 > |-|-|
 > |1|if :condition then goto 1 end|
@@ -67,6 +68,7 @@ It has the advantage of not running constantly, but the drawback of requiring an
 > **Example - Inversed**
 >
 > <sup>Depending on the condition, this method can be shorter than a normal Sleeplock</sup>
+>
 > | | Chip |
 > |-|-|
 > |1|if :condition then :ChipWait = -1 goto 1 end|
@@ -86,6 +88,7 @@ This lock is useful if you need to act in sync with other device, based on a con
 > **Example - Inversed**
 >
 > <sup>Depending on the condition, this method can be shorter than a normal Sleeplock</sup>
+>
 > | | Chip |
 > |-|-|
 > |1|if :condition then :ChipWait = 300 goto 1 end|
