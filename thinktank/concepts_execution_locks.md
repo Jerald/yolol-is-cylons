@@ -11,12 +11,14 @@ This method has the advantage to allow of for complex triggering conditions, but
 Looplocks are most effective when monitoring a device's External Fields, or when the triggering condition require data from multiple sources.
 Due to the fact that a looplock constantly execute its condition line, it may have an increased load on the game servers than a Waitlock or a Sleeplock <sup>unverified</sup>.
 > **Example**
+>
 > | | Chip |
 > |-|-|
 > |1|if :condition then goto 2 end goto 1|
 > |2|*// this line is executed only once the condition is realized*  |
 
 > **Example - Inversed**
+>
 > <sup>Depending on the condition, this method can be shorter than a normal Looplock</sup>
 > | | Chip |
 > |-|-|
@@ -30,6 +32,7 @@ Sleeplock are most effective for scripts designed to be directly activated by ot
 
 
 > **Example**
+>
 > | | Chip |
 > |-|-|
 > |1|:ChipWait = -1|
@@ -41,6 +44,7 @@ This method as the share the same advantages and issues than the sleeplock, with
 Waitlocks are most effective for timers and implementing fallback systems in case a subscript is non-responding.
 
 > **Example**
+>
 > | | Chip |
 > |-|-|
 > |1|:ChipWait = 300|
@@ -54,12 +58,14 @@ Conditional Sleeplock are a combination of a Looplock and a Sleeplock, which all
 It has the advantage of not running constantly, but the drawback of requiring another device to wake it up.
 
 > **Example**
+>
 > | | Chip |
 > |-|-|
 > |1| if :condition then goto 2 else :ChipWait = -1 goto 1|
 > |2|*// this line will not be executed until the condition is realised AND an external source sets :ChipWait to 0*  |
 
 > **Example - Inversed**
+>
 > <sup>Depending on the condition, this method can be shorter than a normal Sleeplock</sup>
 > | | Chip |
 > |-|-|
@@ -71,12 +77,14 @@ Timed Looplock work in the same way as looplock, but check the condition every t
 This lock is useful if you need to act in sync with other device, based on a condition that could become true at any time.
 
 > **Example**
+>
 > | | Chip |
 > |-|-|
 > |1|if :condition then goto 2 end :ChipWait = 300 goto 1|
 > |2|*// Every 300 chip tick (1 minute), the script will verify the condition. If it is true, this line will be executed*  |
 
 > **Example - Inversed**
+>
 > <sup>Depending on the condition, this method can be shorter than a normal Sleeplock</sup>
 > | | Chip |
 > |-|-|
@@ -89,6 +97,7 @@ A Multilock is a sequence of locks, which require activation in sequence for the
 It is possible to build multilocks to including, for example, the need for all the lock to open in a certain timeframe, or to be done step by step and to reset itself if one step is missed.
 
 > **Example - Basic Multilock**
+>
 > | | Chip |
 > |-|-|
 > |1|if :cond1 then goto 2 end goto 1|
@@ -97,6 +106,7 @@ It is possible to build multilocks to including, for example, the need for all t
 > |4|*// This line will be executed if :cond1, :cond2 and :cond3 are realized. Once :cond1 and :cond2 is realized and its lock is passed, it doesn't need to stay realized.*  |
 
 > **Example - Step by Step Multilock**
+>
 > | | Chip |
 > |-|-|
 > |1|if :cond1 then Chipwait = -1 goto 2 end Chipwait = -1 goto 1|
@@ -105,6 +115,7 @@ It is possible to build multilocks to including, for example, the need for all t
 > |4|*// This line will be executed if for each condition, it is realized and an external source sets :Chipwait to 0. If any step fails, the lock resets.*  |
 
 > **Example - Timed Multilock**
+>
 > | | Chip |
 > |-|-|
 > |1|if :cond1 then timer = 300 goto 2 end goto 1|
