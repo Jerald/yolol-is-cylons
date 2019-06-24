@@ -15,6 +15,6 @@ if :i==8 then v8=:v else v9=:v end :listwait=-1 goto 1
 if :i==10 then v10=:v else v11=:v end :listwait=-1 goto 1
 if :i==12 then v12=:v else v13=:v end :listwait=-1 goto 1
 if :i==14 then v14=:v else v15=:v end :listwait=-1 goto 1
-if :i==16 then v14=:v else v17=:v end :listwait=-1 goto 1
+if :i==16 then v16=:v else v17=:v end :listwait=-1 goto 1
 if :i==18 then v18=:v else v19=:v end :listwait=-1 goto 1
 if :i==20 then v20=:v end :listwait=-1 goto 1
