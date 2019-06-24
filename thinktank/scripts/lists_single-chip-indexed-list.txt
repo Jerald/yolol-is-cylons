@@ -1,0 +1,20 @@
+goto 2+(:act=="set")*(:i/2+8)+(:act=="get")*(:i/3)
+:v = (:i==0)*v0+(:i==1)*v1+(:i==2)*v2 :listwait=-1 goto 1
+:v = (:i==3)*v3+(:i==4)*v4+(:i==5)*v5 :listwait=-1 goto 1
+:v = (:i==6)*v6+(:i==7)*v7+(:i==8)*v8 :listwait=-1 goto 1
+:v = (:i==9)*v9+(:i==10)*v10+(:i==11)*v11 :listwait=-1 goto 1
+:v = (:i==12)*v12+(:i==13)*v13+(:i==14)*v14 :listwait=-1 goto 1
+:v = (:i==15)*v15+(:i==16)*v16+(:i==17)*v17 :listwait=-1 goto 1
+:v = (:i==18)*v18+(:i==19)*v19+(:i==20)*v20 :listwait=-1 goto 1
+:listwait=-1 goto 1
+if :i==0 then v0=:v else v1=:v end :listwait=-1 goto 1
+if :i==2 then v2=:v else v3=:v end :listwait=-1 goto 1
+if :i==4 then v4=:v else v5=:v end :listwait=-1 goto 1
+if :i==6 then v6=:v else v7=:v end :listwait=-1 goto 1
+if :i==8 then v8=:v else v9=:v end :listwait=-1 goto 1
+if :i==10 then v10=:v else v11=:v end :listwait=-1 goto 1
+if :i==12 then v12=:v else v13=:v end :listwait=-1 goto 1
+if :i==14 then v14=:v else v15=:v end :listwait=-1 goto 1
+if :i==16 then v14=:v else v17=:v end :listwait=-1 goto 1
+if :i==18 then v18=:v else v19=:v end :listwait=-1 goto 1
+if :i==20 then v20=:v end :listwait=-1 goto 1
