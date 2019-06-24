@@ -1,4 +1,5 @@
 
+
 # YOLOL Concepts : Simple Lists
 *Document Status : Theoritical - none of the methods have been tested.*
 
@@ -16,7 +17,7 @@ A single-chip list is a list stored on a single YOLOL chip, but is limited to a 
 > <sub>In this code, the `:chipwait` field of the chip is renamed `:listwait`. In addition, this code uses the external variables `:i`, `:v` and `:act`, which must be defined.</sub>
 >  
 >  **Using a single-chip list**
->  <sub>In  the following script, the code uses `:chipwait=2` to wait for 2 chip ticks, ensuring that the result has been returned.</sub>
+>  <sub>In  the following script, the code uses `:chipwait=2` to wait for 2 chip ticks, ensuring that execution of the action is completed.</sub>
 >  
 >  | | Chip |
 >  |-|-|
@@ -24,8 +25,9 @@ A single-chip list is a list stored on a single YOLOL chip, but is limited to a 
 >  |2|:i=0 :act="get" :listwait=0 :chipwait=2|
 >  |3|a=:v :i=1 :act="get" :listwait=0 :chipwait=2|
 >  |4|b=:v|
->  |5|*// set the value of the third element (index 2) of the list to the sum of the first two.*|
->  |6|:i=2 :v=a+b :act="set" :listwait=0 :chipwait=2|
+>  |5| |
+>  |6|*// set the value of the third element (index 2) of the list to the sum of the first two.*|
+>  |7|:i=2 :v=a+b :act="set" :listwait=0 :chipwait=2|
 
 ### Multi-chip list
 A multi-chip list is a extension of the single-chip list, with no theoretical limit of size. The following implementation limited to a size of 12 items per chip, with any number of additional chips possible. Like the Single-chip list, it only requires three external variables to work.
@@ -47,13 +49,47 @@ Both the single-chip and multi-chip lists shown before use yolol variables to st
 > A memory chip list is used in exactly the same way as a single-chip list.
 
 ## Stacks
-Stacks are lists which allow scripts to manipulate its data in a LIFO (last in, first out) way. They allow a script to push and pop data from the tail of the list only.
+Stacks are lists which allow scripts to manipulate its data in a LIFO (last in, first out) way. They allow a script to push and pop data from the tail of the list only. In YOLOL, they can be simulated using a indexed list.
 
+> [Stack code](./scripts/lists_stack.txt) <sup>(require an indexed list)</sup>
+> <sub>In this code, the `:chipwait` field of the chip is renamed `:stackwait`. In addition, you must set the value of the `maxsize` variable in the first line of the script to the maximum size of the list.</sub>
+>  
+>  **Using a stack**
+>  <sub>In  the following script, the code uses `:chipwait=3` to wait for 3 chip ticks, ensuring that execution of the action is completed.</sub>
+>  
+>  | | Chip |
+>  |-|-|
+>  |1|*// push : add a value on top of the stack. if the stack is full, skip.*|
+>  |2|:v=42 :act="push" :stackwait=0 :chipwait=3|
+>  |3| |
+>  |4|*// peek : get the top value without removing it from the stack*|
+>  |5|:act="peek" :stackwait=0 :chipwait=3|
+>  |6|value = :v|
+>  |7| |
+>  |8|*// pop : get and remove the value on top the stack.*|
+>  |10|:act="pop" :stackwait=0 :chipwait=3|
+>  |10|value = :v|
 
 ## Queues
-Queues are lists which allow scripts to manipulte its data in a FIFO (first in, first out) way. They allow a script to add data to the tail, but remove them from the head.
+Queues are lists which allow scripts to manipulte its data in a FIFO (first in, first out) way. They allow a script to add data to the tail, but remove them from the head. Like stacks, in YOLOL, they can be simulated using an indexed list, and require three additional external variables : the start of the list
 
-
-
+> [Queue code]() <sup>(require an indexed list)</sup>
+> <sub>In this code, the `:chipwait` field of the chip is renamed `:queuewait`. In addition, you must set the value of the `maxsize` variable in the first line of the script to the maximum size of the list.</sub>
+>  
+>  **Using a queue**
+>  <sub>In  the following script, the code uses `:chipwait=3` to wait for 3 chip ticks, ensuring that execution of the action is completed.</sub>
+>  
+>  | | Chip |
+>  |-|-|
+>  |1|*// push : add a value on top of the stack. if the stack is full, skip.*|
+>  |2|:v=42 :act="push" :stackwait=0 :chipwait=3|
+>  |3| |
+>  |4|*// peek : get the top value without removing it from the stack*|
+>  |5|:act="peek" :stackwait=0 :chipwait=3|
+>  |6|value = :v|
+>  |7| |
+>  |8|*// pop : get and remove the value on top the stack.*|
+>  |10|:act="pop" :stackwait=0 :chipwait=3|
+>  |10|value = :v|
 ## Deques - Double-ended Queues
 Double-ended queues, or deques are lists which allows scripts to add and remove data from either the head to the tail of the list.
