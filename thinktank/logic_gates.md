@@ -1,8 +1,7 @@
-
 # Logic Gates and other Trickery
 *Document Status : Theoritical - none of the methods have been tested.*
 
-YOLOL handle a series logical operations, which allow to determine if a condition is true or not. However, sometimes, you need to verify the validity of multiple conditions at the same time; to do so, we use what are called Logic gates, that YOLOL doesn't natively handle. The following document show how to replicate the various logic gates using the tools at our disposition, as well as a few other tips and tricks regarding the use of logical operations.
+YOLOL handle a series logical operations, which allow to determine if a condition is true or not. However, sometimes, you need to verify the validity of multiple conditions at the same time; to do so, we use what are called Logic gates. The following document show how to use the logic gate that YOLOL offer, and replicate the common ones it doesn't using the tools at our disposition, as well as a few other tips and tricks regarding the use of logical operations.
 
 > **Boolean and Arithmetic**
 > In YOLOL, the values of False and True are `0` and `not-0`; That means that a `if` statement will accept any non-0 value as true. Similarly, logical operations return the decimal values `0` and `1 `; this means that we can use them in normal arithmetic operations, as they are normal decimal values. This document makes use of that fact, and use numerous arithmetic operations in order to recreate logic gates.
@@ -13,17 +12,21 @@ YOLOL handle a series logical operations, which allow to determine if a conditio
 
 ### NOT Gate
 A NOT gate returns the inverse of what it is given. If it receive True, then it return False, and vice versa.
-To create a NOT Gate, you can write : `if (condition == 0)`. This method work with any value for the condition.
+To create a NOT Gate, you can use the **not** operator : `if (not condition)`
 
-A second, slightly shorter method, require the condition to be exactly equal to 0 or 1, and is written : `if (1-condition)`.
+It is possible to write a NOT gate in a second, slightly shorter method : `if (condition==0)`. This method work with any value for the condition.
+
+Finaly, an even shorter method, require the condition to be exactly equal to 0 or 1, and is written : `if (1-condition)`.
 
 ### AND Gate
 A AND gate returns true only if both input values are true. 
-To reproduce a AND gate, simply use : `if (cond1*cond2)`. This method work with any input values.
+To write a AND Gate, you can use the **and** operator : `if(cond1 and cond2)`
+
+A shorter method exists, and is written like this : `if (cond1*cond2)`. This method work with any input values.
 
 ### OR Gate
 A OR gate returns true if  any of the input values are true.
-To create a OR gate, you can write : `if(cond1!=0+cond2!=0)`.
+To create a OR gate, you can use the **or** operator : `if(cond1 or cond2)`.
 
 A shorter method require the input values to be exactly 0 or 1, and is written : `if(cond1+cond2)`.
 
