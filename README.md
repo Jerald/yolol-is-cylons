@@ -9,6 +9,7 @@ The goal is for this to be a community collection of yolol information ranging f
 ## Folders
 This repo contains a number of folders for separating information into different groups. Each folder has a specific use case which is explained below.
 - **/information/:** for general information about yolol and how it can be used
+- **/meta/**: archives various things about the our community itself
 - **/thinktank/:** used to hold ideas, concepts, and suggestions for new work with yolol
 - **/resources/:** a collection of user-made resources to help development and design
 
