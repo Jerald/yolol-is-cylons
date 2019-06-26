@@ -74,7 +74,7 @@ Stacks are lists which allow scripts to manipulate its data in a LIFO (last in, 
 >  |10|value = :v|
 
 ## Queues
-Queues are lists which allow scripts to manipulate its data in a FIFO (first in, first out) way. They allow a script to add data to the tail, but remove them from the head. Like stacks, in YOLOL, they can be simulated using an indexed list, and require three additional external variables : the start of the list
+Queues are lists which allow scripts to manipulate its data in a FIFO (first in, first out) way. They allow a script to add data to the tail, but remove them from the head. Like stacks, in YOLOL, they can be simulated using an indexed list.
 
 > [Queue code](./scripts/lists_queue.yolol) <sup>(require an indexed list)</sup>
 > 
