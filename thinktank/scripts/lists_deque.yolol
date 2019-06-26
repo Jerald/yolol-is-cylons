@@ -1,0 +1,14 @@
+maxsize=21 msi=maxsize s=0 e=0 si=0 :dequewait=-1
+goto 3+(:act=="push")*2+(:act=="pop")*4+(:act=="back")*6
+goto 4+(:act=="unshift")*6+(:act=="shift")*8+(:act=="front")*10
+:dequewait=-1 goto 2
+if si<msi then :i=e si++ e=(s+si-1) :act="set" :listwait=0 end
+e=e-(e>=msi)*msi :dequewait=-1 goto 2
+if si>0 then :i=e-- si-- :act="get" :listwait=0 end
+e=e+(e<msi)*msi :dequewait=-1 goto 2
+:i=e :act="get" :listwait=0 :dequewait=-1 goto 2
+if si<msi then :i=--s si++ :act="set" :listwait=0 end
+s=s+(s<msi)*msi :dequewait=-1 goto 2
+if si>0 then :i=s si-- s++ :act="get" :listwait=0 end
+s=s-(s>=msi)*msi :dequewait=-1 goto 2
+:i=s :act="get" :listwait=0 :dequewait=-1 goto 2

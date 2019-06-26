@@ -1,0 +1,8 @@
+maxsize=21 msi=maxsize s=0 e=0 si=0:queuewait=-1
+goto 3+(:act=="push")+(:act=="pop")*3+(:act=="peek")*5
+:queuewait=-1 goto 2
+if si<msi then :i=e si++ e=(s+si-1) :act="set" :listwait=0 end
+e=e-(e>=msi)*msi :queuewait=-1 goto 2
+if si>0 then :i=s++ si-- :act="get" :listwait=0 end
+s=s-(s>=msi)*msi :queuewait=-1 goto 2
+:i=s :act="get" :listwait=0 :queuewait=-1 goto 2

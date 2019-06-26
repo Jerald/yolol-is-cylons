@@ -1,0 +1,20 @@
+chipnumber=1 d=18*(chipnumber-1) :listwait=-1 goto 2
+i=:i-d goto 2+(i>=0*i<18)*(:act=="set"*(i+8)+:act=="get"*(i/3+1))
+:v = (i==0)*v0+(i==1)*v1+(i==2)*v2 :listwait=-1 goto 2
+:v = (i==3)*v3+(i==4)*v4+(i==5)*v5 :listwait=-1 goto 2
+:v = (i==6)*v6+(i==7)*v7+(i==8)*v8 :listwait=-1 goto 2
+:v = (i==9)*v9+(i==10)*v10+(i==11)*v11 :listwait=-1 goto 2
+goto 2
+if i==0 then v0=:v :listwait=-1 end goto 2
+if i==1 then v1=:v :listwait=-1 end goto 2
+if i==2 then v2=:v :listwait=-1 end goto 2
+if i==3 then v3=:v :listwait=-1 end goto 2
+if i==4 then v4=:v :listwait=-1 end goto 2
+if i==5 then v5=:v :listwait=-1 end goto 2
+if i==6 then v6=:v :listwait=-1 end goto 2
+if i==7 then v7=:v :listwait=-1 end goto 2
+if i==8 then v8=:v :listwait=-1 end goto 2
+if i==9 then v9=:v :listwait=-1 end goto 2
+if i==10 then v10=:v :listwait=-1 end goto 2
+if i==11 then v11=:v :listwait=-1 end goto 2
+goto 2
