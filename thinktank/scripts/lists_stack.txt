@@ -5,5 +5,4 @@ if s<maxsize then :i=s++ :act="set" :listwait=0 end
 :stackwait=-1 goto 2
 if s>0 then :i=--s :act="get" :listwait=0 end
 :stackwait=-1 goto 2
-if s>0 then :i=s-1 :act="get" :listwait=0 end
-:stackwait=-1 goto 2
+:i=s-1 :act="get" :listwait=0 :stackwait=-1 goto 2
