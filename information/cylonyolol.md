@@ -47,3 +47,32 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * Automatic optimizations (constant folding, etc.) are allowed iff they don't change the overall behavior of the program, including acceptable domain and side effects.
  * Modulo operator (`%`) return sign is equal to the sign of the divisor.
  * `True` is equal to `1` and `False` is equal to `0`. Logical operators return either `True` or `False`. This doesn't impact truthiness or falsiness.
+
+## Operators
+
+Some things like operator precedence, associativity, etc. are not yet made completely clear in FrozenByte YOLOL. Here, we define these properties and we specify whether some operators are statements rather than expressions.
+
+### Precedence and Associativity
+
+It doesn't make much significant sense to assign operator statements precedence nor associativity.
+
+| Precedence | Operators                  | Associativity |
+|:----------:|:---------------------------|:-------------:|
+| 1          | `a!`                       | Unary         |
+| 2          | Functions (such as `SQRT`) | Unary         |
+| 3          | Prefix/postfix `++`/`--`   | Unary         |
+| 4          | `a ^ b`                    | Right         |
+| 5          | `a * b` `a / b` `a % b`    | Left          |
+| 6          | `a + b` `a - b`            | Left          |
+| 7          | `a < b` `a > b` `a <= b` `a >= b`| Left    |
+| 8          | `a == b` `a != b`          | Left          |
+
+### Operator Statements
+
+Basic (`a = b`) and compound (`a += b`, etc.) assignment operators are a special type of operator called an _operator statement_. These operator statements are also a type of statement, and thus are not expressions, unlike other types of operator. The following operators are operator statements.
+ * `a = b`
+ * `a += b`
+ * `a -= b`
+ * `a *= b`
+ * `a /= b`
+ * `a %= b`
