@@ -59,9 +59,9 @@ It doesn't make much significant sense to assign operator statements precedence 
 
 | Precedence | Operators                  | Associativity |
 |:----------:|:---------------------------|:-------------:|
-| 1          | `a!`                       | Unary         |
-| 2          | Functions (such as `SQRT`) | Unary         |
-| 3          | Prefix/postfix `++`/`--`   | Unary         |
+| 1          | Prefix/postfix `++`/`--`   | Unary         |
+| 2          | `a!`                       | Unary         |
+| 3          | Functions (such as `SQRT`) | Unary         |
 | 4          | `a ^ b`                    | Right         |
 | 5          | `a * b` `a / b` `a % b`    | Left          |
 | 6          | `a + b` `a - b`            | Left          |
