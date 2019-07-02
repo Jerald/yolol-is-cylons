@@ -39,6 +39,7 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * The maximum value for a number is `9223372036854775.807` and the minimum value `-9223372036854775.808`. Only four decimal digits of sub-integer precision are guaranteed.
  * If a number overflows, it is set to the maximum number value, `9223372036854775.807`.
  * If a number underflows, it is set to the minimum number value, `-9223372036854775.808`.
+ * The maximum length for a string is guaranteed to be at least 2^16 (`65536`) chars.
  * Division by `0` and `0 ^ -1` throw a runtime error.
  * `ARCSIN`/`ARCCOS` throw a runtime error when given any number not in [-1, 1].
  * Trigonometric functions operate on degrees.
