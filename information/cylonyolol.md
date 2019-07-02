@@ -43,11 +43,11 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * `ARCSIN`/`ARCCOS` throw a runtime error when given any number not in [-1, 1].
  * Trigonometric functions operate on degrees.
  * The first line in a chip is Line 1, and `GOTO 1` goes to it.
- * `GOTO N` goes to the `N`th line number. If `N` is not an integer in [1, 20], it throws a runtime error.
+ * `GOTO N` goes to the `N`th line number. If `N` is a non-integer number, it is floored. `N` is then clamped to [1, 20].
  * Automatic optimizations (constant folding, etc.) are allowed iff they don't change the overall behavior of the program, including acceptable domain and side effects.
  * Modulo operator (`%`) return sign is equal to the sign of the divisor.
  * Modulo operator (`%`) returns the sub-integer part, such as a floating point mod. Example: `2.3 % 2` is `0.3`.
- * `True` is equal to `1` and `False` is equal to `0`. Logical operators return either `True` or `False`. This doesn't impact truthiness or falsiness.
+ * The literals `True` and `False` are equal to `1` and `0` respectively. Logical operators return either of these literals.
 
 ## Operators
 
