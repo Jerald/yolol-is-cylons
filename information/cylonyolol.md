@@ -46,6 +46,7 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * `GOTO N` goes to the `N`th line number. If `N` is not an integer in [1, 20], it throws a runtime error.
  * Automatic optimizations (constant folding, etc.) are allowed iff they don't change the overall behavior of the program, including acceptable domain and side effects.
  * Modulo operator (`%`) return sign is equal to the sign of the divisor.
+ * Modulo operator (`%`) returns the sub-integer part, such as a floating point mod. Example: `2.3 % 2` is `0.3`.
  * `True` is equal to `1` and `False` is equal to `0`. Logical operators return either `True` or `False`. This doesn't impact truthiness or falsiness.
 
 ## Operators
@@ -58,9 +59,9 @@ It doesn't make much significant sense to assign operator statements precedence 
 
 | Precedence | Operators                  | Associativity |
 |:----------:|:---------------------------|:-------------:|
-| 1          | `a!`                       | Unary         |
-| 2          | Functions (such as `SQRT`) | Unary         |
-| 3          | Prefix/postfix `++`/`--`   | Unary         |
+| 1          | Prefix/postfix `++`/`--`   | Unary         |
+| 2          | `a!`                       | Unary         |
+| 3          | Functions (such as `SQRT`) | Unary         |
 | 4          | `a ^ b`                    | Right         |
 | 5          | `a * b` `a / b` `a % b`    | Left          |
 | 6          | `a + b` `a - b`            | Left          |
