@@ -52,7 +52,7 @@ Syntax errors result in the _line_ (not statement) being parsed to be completely
  * Automatic optimizations (constant folding, etc.) are allowed iff they don't change the overall behavior of the program, including acceptable domain and side effects.
  * Modulo operator (`%`) return sign is equal to the sign of the divisor.
  * Modulo operator (`%`) returns the sub-integer part, such as a floating point mod. Example: `2.3 % 2` is `0.3`.
- * The literals `True` and `False` are equal to `1` and `0` respectively. Logical operators return either of these literals.
+ * The literals `True` and `False` are equal to `1` and `0` respectively. Logical operators (`==`, `and`, `not`, etc.) return either of these literals.
 
 ### Runtime Errors
 
@@ -66,16 +66,19 @@ Some things like operator precedence, associativity, etc. are not yet made compl
 
 It doesn't make much significant sense to assign operator statements precedence nor associativity.
 
-| Precedence | Operators                  | Associativity |
-|:----------:|:---------------------------|:-------------:|
-| 1          | Prefix/postfix `++`/`--`   | Unary         |
-| 2          | `a!`                       | Unary         |
-| 3          | Functions (such as `SQRT`) | Unary         |
-| 4          | `a ^ b`                    | Right         |
-| 5          | `a * b` `a / b` `a % b`    | Left          |
-| 6          | `a + b` `a - b`            | Left          |
-| 7          | `a < b` `a > b` `a <= b` `a >= b`| Left    |
-| 8          | `a == b` `a != b`          | Left          |
+| Precedence | Operators                        | Associativity |
+|:----------:|:---------------------------------|:-------------:|
+| 1          | Prefix/postfix `++`/`--`         | Unary         |
+| 2          | `-a`                             | Unary         |
+| 3          | `a!`                             | Unary         |
+| 4          | Keyword operators (ex: `SQRT`)   | Unary         |
+| 5          | `a ^ b`                          | Right         |
+| 6          | `a * b` `a / b` `a % b`          | Left          |
+| 7          | `a + b` `a - b`                  | Left          |
+| 8          | `a < b` `a > b` `a <= b` `a >= b`| Left          |
+| 9          | `a == b` `a != b`                | Left          |
+| 10         | `a or b`                         | Left          |
+| 11         | `a and b`                        | Left          |
 
 ### Operator Statements
 
