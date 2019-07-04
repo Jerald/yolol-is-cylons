@@ -26,14 +26,18 @@ This document intends to be detailing the _differences_ between Cylon YOLOL and 
 This means that, if we document "Triple factorial is disallowed", we're describing _Cylon_ YOLOL as disallowing triple factorial, not FrozenByte YOLOL.
 We also may document some things that are true in FrozenByte YOLOL, such as "Trig operators use degrees". It's just for clarity.
 
-## Parsing and Syntax Errors
+## Parsing
 
  * `++`/`--` operators (prefix/postfix increment/decrement) cannot operate on expressions in parentheses. For example, `(a)++` is disallowed, but `a++` is fine.
  * `++`/`--` operators (prefix/postfix increment/decrement) can only operate on identifiers. For example, `a++` is fine, but `--++a` and `(1+2)++` are disallowed.
  * Single and double factorial operator (`!!`) support is required. This means `a!`, `a!!`, `(a!)!!`, and `(2+3)!!` are guaranteed supported. `a!!!` and `(23 - 4)!!!!!!` are not guaranteed.
  * Basic and compound assignment operators (`+=`, `=`, `%=`, etc.) are statements, not expressions. `x = (y += 5) + 20` is disallowed, but `x = (y + 5) + 20` is allowed.
 
-## Semantics and Runtime Errors
+### Syntax Errors
+
+Syntax errors result in the _line_ (not statement) being parsed to be completely skipped in parsing and execution. Diagnosis recommended.
+
+## Semantics
 
  * The factorial operator (`!`) is guaranteed to be equal to the factorial function at nonnegative integers. Other inputs are either a runtime error if not supported, or may return a number using another function (Gamma, flooring, etc.).
  * The maximum value for a number is `9223372036854775.807` and the minimum value `-9223372036854775.808`. Only four decimal digits of sub-integer precision are guaranteed.
@@ -48,7 +52,11 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * Automatic optimizations (constant folding, etc.) are allowed iff they don't change the overall behavior of the program, including acceptable domain and side effects.
  * Modulo operator (`%`) return sign is equal to the sign of the divisor.
  * Modulo operator (`%`) returns the sub-integer part, such as a floating point mod. Example: `2.3 % 2` is `0.3`.
- * The literals `True` and `False` are equal to `1` and `0` respectively. Logical operators return either of these literals.
+ * The literals `True` and `False` are equal to `1` and `0` respectively. Logical operators (`==`, `and`, `not`, etc.) return either of these literals.
+
+### Runtime Errors
+
+Runtime errors result in the remainder of the _line_ (not statement) being skipped. Any effects up to the error are kept. Diagnosis recommended.
 
 ## Operators
 
@@ -58,16 +66,19 @@ Some things like operator precedence, associativity, etc. are not yet made compl
 
 It doesn't make much significant sense to assign operator statements precedence nor associativity.
 
-| Precedence | Operators                  | Associativity |
-|:----------:|:---------------------------|:-------------:|
-| 1          | Prefix/postfix `++`/`--`   | Unary         |
-| 2          | `a!`                       | Unary         |
-| 3          | Functions (such as `SQRT`) | Unary         |
-| 4          | `a ^ b`                    | Right         |
-| 5          | `a * b` `a / b` `a % b`    | Left          |
-| 6          | `a + b` `a - b`            | Left          |
-| 7          | `a < b` `a > b` `a <= b` `a >= b`| Left    |
-| 8          | `a == b` `a != b`          | Left          |
+| Precedence | Operators                        | Associativity |
+|:----------:|:---------------------------------|:-------------:|
+| 1          | Prefix/postfix `++`/`--`         | Unary         |
+| 2          | `-a`                             | Unary         |
+| 3          | `a!`                             | Unary         |
+| 4          | Keyword operators (ex: `SQRT`)   | Unary         |
+| 5          | `a ^ b`                          | Right         |
+| 6          | `a * b` `a / b` `a % b`          | Left          |
+| 7          | `a + b` `a - b`                  | Left          |
+| 8          | `a < b` `a > b` `a <= b` `a >= b`| Left          |
+| 9          | `a == b` `a != b`                | Left          |
+| 10         | `a or b`                         | Left          |
+| 11         | `a and b`                        | Left          |
 
 ### Operator Statements
 
