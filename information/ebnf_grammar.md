@@ -22,17 +22,23 @@ assign_statement = identifier, assign_op, expression;
 (* Expressions evaluate to a value *)
 expression =    identifier, postfix_ident_op, expr_extension |
                 prefix_ident_op, identifier, expr_extension |
-                prefix_op, expression, expr_extension |
+                prefix_op_neg, expression, expr_extension |
+                prefix_keyword_op, expression, expr_extension |
                 value, expr_extension;
 
-expr_extension =    infix_op_exponent, value |
-                    extension_additive |
+expr_extension =    postfix_op_fact |
+                    infix_op_exponent, expression |
+                    extension_logical |
                     postfix_op |
                     nothing;
 
-extension_additive = extension_multiply | infix_op_additive, extension_additive;
-extension_multiply = extension_logical  | infix_op_muliply, extension_multiply;
-extension_logical  = value              | infix_op_logical, extension_logical;
+extension_logical   = extension_additive    | infix_op_logical, extension_logical;
+extension_and       = extension_or          | infix_op_and, extension_and;
+extension_or        = extension_equality    | infix_op_or, extension_or;
+extension_equality  = extension_order       | infix_op_equality, extension_equality;
+extension_order     = extension_additive    | infix_op_order, extension_order;
+extension_additive  = extension_multiply    | infix_op_additive, extension_additive;
+extension_multiply  = value                 | infix_op_multiply, extension_multiply;
 
 value = string | number | identifier | '(', expression, ')';
 
@@ -47,14 +53,20 @@ comment = '/', '/', { anything except '\n' }, '\n';
 assign_op = '=' | '+=' | '-=' | '*=' | '/=' | '%=';
 
 prefix_ident_op = '++' | '--';
-prefix_op = '-' | 'abs' | 'sqrt' | 'sin' | 'cos' | 'tan' | 'arcsin' | 'arccos' | 'arctan' | 'not';
+prefix_keyword_op = 'abs' | 'sqrt' | 'sin' | 'cos' | 'tan' | 'arcsin' | 'arccos' | 'arctan' | 'not';;
+prefix_op_neg = '-';
 
 postfix_ident_op = '++' | '--';
-postfix_op = '!';
+postfix_op_fact = '!';
 
 infix_op_exponent = '^';
-infix_op_logical = '<' | '<=' | '>' | '>=' | '==' | '!=' | 'and' | 'or';
-infix_op_muliply = '*' | '/' | '%';
+
+infix_op_order = '<' | '<=' | '>' | '>=';
+infix_op_equality = '==' | '!=';
+infix_op_or = 'or';
+infox_op_and = 'and';
+
+infix_op_multiply = '*' | '/' | '%';
 infix_op_additive = '+' | '-';
 
 (* Ascii values between space and tilde, excluding double quote mark which is ascii 34 *)
