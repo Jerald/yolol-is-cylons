@@ -2,7 +2,7 @@
 
 > Written by Oscar (Matrixmage).
 >
-> This spec as primarily designed by the Cylon users (in alphabetical order):  
+> This spec as primarily designed by the following Cylon users (in alphabetical order):  
 > `Chthonium#3988`  
 > `Martin#2468`  
 > `Matrixmage#4830`  
@@ -23,89 +23,121 @@ The Cylon Yolol AST ("Cylon AST" from now on) specification is designed with the
 
 # Specification
 
-A compliant Cylon AST is a UTF-8 encoded text file formatted in JSON. A single Cylon AST JSON file is designed to represent a single program, which has some number lines within it.
+A compliant Cylon AST is a UTF-8 encoded text file formatted in JSON. A single Cylon AST JSON file is designed to represent a single program, which has some number of lines within it.
+
+**Every** key in a compliant Cylon AST is in lowercase, with snake_case used to separate words. This is to make things as simple and unambiguous as possible.
 
 ## Nodes
 
-A Cylon AST is made up of many nodes, each representing an aspect of the program. All nodes have certain required keys, but may have any other keys present without violating compliance.
+A Cylon AST is made up of many nodes, each representing an aspect of the program. All nodes have certain required keys, which must be included for maintaining compliance. Nodes may not contain any keys which aren't required or optional; containing arbitrary keys is non-compliant.
+
+**Most** nodes contain an explicitly required `type` key. This type is the same as the name of the node in the node list below. Some nodes have sub-types, for example `goto` is a sub-type of `statement`. In this case, the `type` key would have the value `statement::goto`, which is reflected in the node list below.
+
+
+### Metadata
+All nodes may optionally contain a `metadata` key, allowed to contain arbitrary keys and values for consumption by other tools. Any information added to `metadata` **must** be within a key named after the tool which added it. This is to prevent naming collisions between metadata added by different tools.
+
+For example, metadata information added by yovec must be nested like so:
+```jsonc
+"metadata": {
+    "yovec": {
+        // yovec metadata keys
+    }
+}
+```
+
+### Node types
+
+Below is an exhaustive list of all the node types that can exist in a compliant Cylon AST. The required keys list for each node has the keys written in the form `<name>: <type>`, to make things more explicit.
 
 ---
 
 ### `root`
-**Required keys:** `program: Node`
+**Required keys:** `program: Node<program>`
 
-This is the outermost enclosing node in a Cylon AST. Everything is within the root node. Note that the `root` node is **unnamed** by virtue of being the enclosing JSON object itself.
+This is the outermost enclosing node in a Cylon AST. Everything is within the root node. Note that the `root` node is **unnamed** by virtue of being the enclosing JSON object itself. It is also one of the only nodes without a `type` key.
 
 ---
 
 ### `program`
-**Required keys:** `lines: Array<Line>`
+**Required keys:** `type: String`, `lines: Array<Node<line>>`
 
 Represents a singular program in yolol. The `lines` key is an array of `line` nodes. Although yolol programs may never exceed 20 lines, there is no limit on the size of the `lines` key.
 
 ---
 
 ### `line`
-**Required keys:** `contents: Array<Statement>`
+**Required keys:** `type: String`, `code: Array<Node<statement>>`
 
-Represents a singular line of yolol code. The `contents` key is an array of `statement` nodes. The final element in the `contents` key may optionally be a `comment` node
+Represents a singular line of yolol code. The `code` key is an array of `statement` nodes. The final element in the `code` key may optionally be a `comment` node. A `comment` node in any other location within a `code` key is non-compliant. Although real lines in yolol may not exceed 70 characters, there is no restriction on the size of the `code` key.
 
 ---
 
 ### `comment`
-**Required keys:** `value: String`
+**Required keys:** `type: String`, `value: String`
 
-This node represents a comment in yolol. The `value` key is the exact text of the comment.
+A comment in yolol. The `value` key is the exact text of the comment, which is everything after the leading `//`.
 
 ---
 
 ### `statement`
-**Required keys:** `kind: String`, `<value of kind>: Statement::*`
+**Required keys:** `type: String`, others as dictated by the chosen sub-type
 
-A singular statement in yolol. The `kind` key dictates which kind of statement the node represents, and may contain one of the following values: `goto`, `if`, `assignment`, or `expression`. There is **exactly one** key with a name out of `kind`'s values, which must match the value of `kind` in that node, and represents one of the following statement kinds.
+A singular statement in yolol. The `type` key dictates which kind of statement the node represents, and may contain one of the below sub-type names. The statement node will have other required keys as dictated by which sub-type the node is.
 
 ### `statement::goto`
-**Required keys:** `expression: Expression`
+**Required keys:** `expression: Node<expression>`
 
 A goto statement. Contains the expression which evaluates to which line to go to.
 
 ### `statement::if`
-**Required keys:** `condition: Expression`, `body: Array`, `else_body: Array<Statement>`
+**Required keys:** `condition: Node<expression>`, `body: Array<statement>`, `else_body: Array<statement>`
 
 An if statement. The `condition` key is the expression which evaluates to the control condition. `body` and `else_body` contain arrays of the statements to execute based on the `condition` value.
 
 ### `statement::assignment`
-**Required keys:** `identifier: String`, `operator: AssignmentOp`, `value: Expression`
+**Required keys:** `identifier: String`, `operator: String`, `value: Expression`
 
-An assignment operation. `identifier` contains the name of the identifier to modify, prefixed by a colon if it's a data field. `operator` is which assignment operator is being used. `value` is an expression which evaluates to the value to be assigned.
+An assignment operation. `identifier` contains the name of the identifier to modify, prefixed by a colon if it's a data field. `operator` is a string which contains the textual representation (`+=` for example) of the actual operator being applied. `value` is an expression which evaluates to the value to be assigned.
 
 ### `statement::expression`
+**Required keys:** `expression: Node<expression>`
 
-An Expression type node. Exact duplicate requirements.
+A wrapper around an expression type node. `expression` is the expression being wrapped.
 
 ---
 
 ### `expression`
-**Required keys:** `kind: String`, `<value of kind>: Expression::*`
+**Required keys:** `type: String`, others as dictated by the chosen sub-type
+
+An expression in yolol. The `type` key dictates which kind of expression the node represents, and may contain one of the below sub-type names. The expression node will have other required keys as dictated by which sub-type the node is.
 
 ### `expression::group`
+**Required keys:** `group: Node<expression>`
 
-An expression type node. Exact duplicate requirements.
+A wrapper for an expression wrapped in parenthesis. The `group` key contains said wrapped expression.
 
 ### `expression::binary_op`
-**Required keys:** `operator: BinaryOp`, `left: Expression`, `right: Expression`
+**Required keys:** `operator: string`, `left: Node<expression>`, `right: Node<expression>`
+
+A binary operation in yolol. The `operator` key is a string which contains the textual representation (`+` for example) of the actual operator being applied. `left` and `right` contain the expressions that evaluate to the left and right hand sides, respectively, of the operator.
 
 ### `expression::unary_op`
-**Required keys:** `operator: UnaryOp`, `target: Expression`
+**Required keys:** `operator: String`, `target: Expression`
+
+A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `target` contains the expression that evaluates to the value that the operator is applied to.
 
 ### `expression::value`
+**Required keys:** `value: Node<value>`
 
-A value type node. Exact duplicate requirements
+A wrapper around a value type node. `value` is the value being wrapped.
 
 ---
 
 ### `value`
-**Required keys:** `kind: String`, `<value of kind>: Value::*`
+**Required keys:** `type: String`, other keys as dictated by the chosen sub-type
+
+A value in yolol. The `type` key dictates which kind of value the node represents, and may contain one of the below sub-type names. The value node will have other required keys as dictated by which sub-type the node is.
 
 ### `value::identifier`
 **Required keys:** `name: String`
