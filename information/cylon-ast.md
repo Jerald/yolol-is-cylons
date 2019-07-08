@@ -65,16 +65,12 @@ A program in yolol. The `lines` key is an array of `line` nodes. Although yolol 
 ---
 
 ### `line`
-**Required keys:** `type: String`, `code: Array<Node<statement>> `
+**Required keys:** `type: String`, `code: Array<Node<statement>>`  
+**Optional keys:** `comment: String`
 
-A singular line of yolol code. The `code` key is an array of `statement` nodes. The final element in the `code` key may optionally be a `comment` node (not reflected in `code` type). A `comment` node in any other location within a `code` key is non-compliant. Although real lines in yolol may not exceed 70 characters, there is no restriction on the size of the `code` key or nodes within it.
+A singular line of yolol code. The `code` key is an array of `statement` nodes. Although real lines in yolol may not exceed 70 characters, there is no restriction on the size of the `code` key or nodes within it.
 
----
-
-### `comment`
-**Required keys:** `type: String`, `value: String`
-
-A comment in yolol. The `value` key is the exact text of the comment, which is everything after the leading `//`.
+The optional `comment` key is a string which contains the exact text of a comment, which is everything after the leading `//`. This comment is by definition assumed to exist at the end of the line, since comments may never exist in the middle of a valid yolol line. It is compliant to have an empty `code` array but still have a `comment` string.
 
 ---
 
