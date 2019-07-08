@@ -2,7 +2,7 @@
 
 > Written by Oscar (Matrixmage).
 >
-> This spec as primarily designed by the following Cylon users (in alphabetical order):  
+> This spec was primarily designed by the following Cylon users (in alphabetical order):  
 > `Chthonium#3988`  
 > `Martin#2468`  
 > `Matrixmage#4830`  
@@ -10,8 +10,6 @@
 > `rad dude broham#2970`  
 
 To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
-
----
 
 # Design goals
 
@@ -37,7 +35,7 @@ A Cylon AST is made up of many nodes, each representing an aspect of the program
 ### Metadata
 All nodes may optionally contain a `metadata` key, allowed to contain arbitrary keys and values for consumption by other tools. Any information added to `metadata` **must** be within a key named after the tool which added it. This is to prevent naming collisions between metadata added by different tools.
 
-For example, metadata information added by yovec must be nested like so:
+For example, metadata information added by [Yovec](https://github.com/averycrespi/yovec) must be nested like so:
 ```jsonc
 "metadata": {
     "yovec": {
@@ -62,14 +60,14 @@ This is the outermost enclosing node in a Cylon AST. Everything is within the ro
 ### `program`
 **Required keys:** `type: String`, `lines: Array<Node<line>>`
 
-Represents a singular program in yolol. The `lines` key is an array of `line` nodes. Although yolol programs may never exceed 20 lines, there is no limit on the size of the `lines` key.
+A program in yolol. The `lines` key is an array of `line` nodes. Although yolol programs may never exceed 20 lines, there is no limit on the size of the `lines` key.
 
 ---
 
 ### `line`
-**Required keys:** `type: String`, `code: Array<Node<statement>>`
+**Required keys:** `type: String`, `code: Array<Node<statement>> `
 
-Represents a singular line of yolol code. The `code` key is an array of `statement` nodes. The final element in the `code` key may optionally be a `comment` node. A `comment` node in any other location within a `code` key is non-compliant. Although real lines in yolol may not exceed 70 characters, there is no restriction on the size of the `code` key.
+A singular line of yolol code. The `code` key is an array of `statement` nodes. The final element in the `code` key may optionally be a `comment` node (not reflected in `code` type). A `comment` node in any other location within a `code` key is non-compliant. Although real lines in yolol may not exceed 70 characters, there is no restriction on the size of the `code` key or nodes within it.
 
 ---
 
@@ -88,10 +86,10 @@ A singular statement in yolol. The `type` key dictates which kind of statement t
 ### `statement::goto`
 **Required keys:** `expression: Node<expression>`
 
-A goto statement. Contains the expression which evaluates to which line to go to.
+A goto statement. Contains the expression which evaluates to the destination line.
 
 ### `statement::if`
-**Required keys:** `condition: Node<expression>`, `body: Array<statement>`, `else_body: Array<statement>`
+**Required keys:** `condition: Node<expression>`, `body: Array<Node<statement>>`, `else_body: Array<Node<statement>>`
 
 An if statement. The `condition` key is the expression which evaluates to the control condition. `body` and `else_body` contain arrays of the statements to execute based on the `condition` value.
 
@@ -123,9 +121,9 @@ A wrapper for an expression wrapped in parenthesis. The `group` key contains sai
 A binary operation in yolol. The `operator` key is a string which contains the textual representation (`+` for example) of the actual operator being applied. `left` and `right` contain the expressions that evaluate to the left and right hand sides, respectively, of the operator.
 
 ### `expression::unary_op`
-**Required keys:** `operator: String`, `target: Expression`
+**Required keys:** `operator: String`, `operand: Expression`
 
-A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `target` contains the expression that evaluates to the value that the operator is applied to.
+A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
 
 ### `expression::value`
 **Required keys:** `value: Node<value>`
@@ -142,9 +140,9 @@ A value in yolol. The `type` key dictates which kind of value the node represent
 ### `value::identifier`
 **Required keys:** `name: String`
 
-Represents either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
+Either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
 
 ### `value::number`
 **Required keys:** `num: String`
 
-Represents a yolol number. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
+A number in yolol. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
