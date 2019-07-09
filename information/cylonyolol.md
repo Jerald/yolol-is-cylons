@@ -32,6 +32,7 @@ We also may document some things that are true in FrozenByte YOLOL, such as "Tri
  * `++`/`--` operators (prefix/postfix increment/decrement) can only operate on identifiers. For example, `a++` is fine, but `--++a` and `(1+2)++` are disallowed.
  * Single and double factorial operator (`!!`) support is required. This means `a!`, `a!!`, `(a!)!!`, and `(2+3)!!` are guaranteed supported. `a!!!` and `(23 - 4)!!!!!!` are not guaranteed.
  * Basic and compound assignment operators (`+=`, `=`, `%=`, etc.) are statements, not expressions. `x = (y += 5) + 20` is disallowed, but `x = (y + 5) + 20` is allowed.
+ * Internal variables cannot use a keyword as an identifier. For example, `goto = 5` is not allowed, but `:goto = 5` is allowed.
 
 ### Syntax Errors
 
