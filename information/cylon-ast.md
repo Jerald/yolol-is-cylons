@@ -33,16 +33,7 @@ A Cylon AST is made up of many nodes, each representing an aspect of the program
 
 
 ### Metadata
-All nodes may optionally contain a `metadata` key, allowed to contain arbitrary keys and values for consumption by other tools. Any information added to `metadata` **must** be within a key named after the tool which added it. This is to prevent naming collisions between metadata added by different tools.
-
-For example, metadata information added by [Yovec](https://github.com/averycrespi/yovec) must be nested like so:
-```jsonc
-"metadata": {
-    "yovec": {
-        // yovec metadata keys
-    }
-}
-```
+All nodes may optionally contain a `metadata` key, allowed to contain arbitrary keys and values for consumption by other tools.
 
 ### Node types
 
@@ -51,9 +42,11 @@ Below is an exhaustive list of all the node types that can exist in a compliant 
 ---
 
 ### `root`
-**Required keys:** `program: Node<program>`
+**Required keys:** `version: String`, `program: Node<program>`
 
 This is the outermost enclosing node in a Cylon AST. Everything is within the root node. Note that the `root` node is **unnamed** by virtue of being the enclosing JSON object itself. It is also one of the only nodes without a `type` key.
+
+The `version` key is a [SemVer](https://semver.org/) encoded string representing what version of the Cylon AST spec the output was designed for.
 
 ---
 
