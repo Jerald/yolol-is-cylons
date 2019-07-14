@@ -9,7 +9,7 @@
 > `Pyry#6210`  
 > `rad dude broham#2970`  
 
-**Version 0.1.0**
+**Version 0.2.0**
 
 To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
 
@@ -137,3 +137,8 @@ Either a local variable or a data field in yolol. Data field identifiers are pre
 **Required keys:** `num: String`
 
 A number in yolol. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
+
+### `value::string`
+**Required keys:** `str: String``
+
+Encodes a string. Does not include the quotation marks defining the start and end of the string.
