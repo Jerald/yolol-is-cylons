@@ -39,7 +39,7 @@ e.g. `7 + "7"`
 
 Type metadata is included in the `metadata` node of any expression. In the following format:
 
-```
+```json
 "metadata": {
     "type": {
         "version": "1.0.0",
