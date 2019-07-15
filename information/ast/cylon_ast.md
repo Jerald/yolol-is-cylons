@@ -9,7 +9,7 @@
 > `Pyry#6210`  
 > `rad dude broham#2970`  
 
-**Version 0.2.0**
+**Version 0.3.0**
 
 To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
 
@@ -116,29 +116,17 @@ A binary operation in yolol. The `operator` key is a string which contains the t
 
 A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
 
-### `expression::value`
-**Required keys:** `value: Node<value>`
-
-A wrapper around a value type node. `value` is the value being wrapped.
-
----
-
-### `value`
-**Required keys:** `type: String`, other keys as dictated by the chosen sub-type
-
-A value in yolol. The `type` key dictates which kind of value the node represents, and may contain one of the below sub-type names. The value node will have other required keys as dictated by which sub-type the node is.
-
-### `value::identifier`
-**Required keys:** `name: String`
-
-Either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
-
-### `value::number`
+### `expression::number`
 **Required keys:** `num: String`
 
 A number in yolol. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
 
-### `value::string`
-**Required keys:** `str: String``
+### `expression::string`
+**Required keys:** `str: String`
 
 Encodes a string. Does not include the quotation marks defining the start and end of the string.
+
+### `expression::identifier`
+**Required keys:** `name: String`
+
+Either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
