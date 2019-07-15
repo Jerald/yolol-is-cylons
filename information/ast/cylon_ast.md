@@ -121,6 +121,16 @@ A unary operation in yolol. The `operator` key is a string which contains the te
 
 A wrapper around a value type node. `value` is the value being wrapped.
 
+### `expression::number`
+**Required keys:** `num: String`
+
+A number in yolol. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
+
+### `expression::string`
+**Required keys:** `str: String`
+
+Encodes a string. Does not include the quotation marks defining the start and end of the string.
+
 ---
 
 ### `value`
@@ -132,13 +142,3 @@ A value in yolol. The `type` key dictates which kind of value the node represent
 **Required keys:** `name: String`
 
 Either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
-
-### `value::number`
-**Required keys:** `num: String`
-
-A number in yolol. Is encoded as a string due to the hyper-specific decimal rules binding compliant yolol numbers.
-
-### `value::string`
-**Required keys:** `str: String``
-
-Encodes a string. Does not include the quotation marks defining the start and end of the string.
