@@ -9,7 +9,7 @@
 > `Pyry#6210`  
 > `rad dude broham#2970`  
 
-**Version 0.2.0**
+**Version 0.3.0**
 
 To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
 
