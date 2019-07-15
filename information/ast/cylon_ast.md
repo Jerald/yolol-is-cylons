@@ -131,14 +131,7 @@ A number in yolol. Is encoded as a string due to the hyper-specific decimal rule
 
 Encodes a string. Does not include the quotation marks defining the start and end of the string.
 
----
-
-### `value`
-**Required keys:** `type: String`, other keys as dictated by the chosen sub-type
-
-A value in yolol. The `type` key dictates which kind of value the node represents, and may contain one of the below sub-type names. The value node will have other required keys as dictated by which sub-type the node is.
-
-### `value::identifier`
+### `expression::identifier`
 **Required keys:** `name: String`
 
 Either a local variable or a data field in yolol. Data field identifiers are prefixed by a colon in their string value.
