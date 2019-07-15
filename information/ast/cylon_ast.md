@@ -116,11 +116,6 @@ A binary operation in yolol. The `operator` key is a string which contains the t
 
 A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
 
-### `expression::value`
-**Required keys:** `value: Node<value>`
-
-A wrapper around a value type node. `value` is the value being wrapped.
-
 ### `expression::number`
 **Required keys:** `num: String`
 
