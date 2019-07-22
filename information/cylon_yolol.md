@@ -41,9 +41,9 @@ Syntax errors result in the _line_ (not statement) being parsed to be completely
 ## Semantics
 
  * The factorial operator (`!`) is guaranteed to be equal to the factorial function at nonnegative integers. Other inputs are either a runtime error if not supported, or may return a number using another function (Gamma, flooring, etc.).
- * The maximum value for a number is `9223372036854775.807` and the minimum value `-9223372036854775.808`. Only four decimal digits of sub-integer precision are guaranteed.
- * If a number overflows, it is set to the maximum number value, `9223372036854775.807`.
- * If a number underflows, it is set to the minimum number value, `-9223372036854775.808`.
+ * The maximum value for a number is `922337203685477.5807` (MAX_VALUE) and the minimum value `-922337203685477.5808` (MIN_VALUE). Only four decimal digits of sub-integer precision are guaranteed.
+ * If a number overflows, it is set to MAX_VALUE.
+ * If a number underflows, it is set to MIN_VALUE.
  * The maximum length for a string is guaranteed to be at least 2^16 (`65536`) chars.
  * Division by `0` and `0 ^ -1` throw a runtime error.
  * `ARCSIN`/`ARCCOS` throw a runtime error when given any number not in [-1, 1].
