@@ -22,19 +22,19 @@ assign_statement = identifier, assign_op, expression;
 (* Expressions evaluate to a value *)
 expression      = expr_and;
 
-expr_and        = expr_or,          | expr_and,         infix_op_and,       exor_or;
-expr_or         = expr_equality,    | expr_or,          infix_op_or,        expr_equality;
-expr_equality   = expr_order,       | expr_equality,    infix_op_equality,  expr_order;
-expr_order      = expr_additive,    | expr_order,       infix_op_order,     expr_additive;
-expr_additive   = expr_multiply,    | expr_additive,    infix_op_additive,  expr_multiply;
-expr_multiply   = expr_exponent,    | expr_multiply,    infix_op_multiply,  expr_exponent;
+expr_and        = expr_or           | expr_and,         infix_op_and,       exor_or;
+expr_or         = expr_equality     | expr_or,          infix_op_or,        expr_equality;
+expr_equality   = expr_order        | expr_equality,    infix_op_equality,  expr_order;
+expr_order      = expr_additive     | expr_order,       infix_op_order,     expr_additive;
+expr_additive   = expr_multiply     | expr_additive,    infix_op_additive,  expr_multiply;
+expr_multiply   = expr_exponent     | expr_multiply,    infix_op_multiply,  expr_exponent;
 
 (* Exponent is special because of associativity *)
-expr_exponent   = expr_postfix,     | expr_postfix,     infix_op_exponent,  expr_exponent;
-expr_postfix    = expr_keyword,     | expr_postfix,     postfix_op_fact;
+expr_exponent   = expr_postfix      | expr_postfix,     infix_op_exponent,  expr_exponent;
+expr_postfix    = expr_keyword      | expr_postfix,     postfix_op_fact;
 
 expr_keyword    = expr_neg          | prefix_keyword_op, expr_keyword;
-expr_neg        = expr_ident,       | prefix_op_neg,     expr_neg;
+expr_neg        = expr_ident        | prefix_op_neg,     expr_neg;
 
 expr_ident      = identifier, postfix_ident_op |
                   prefix_ident_op, identifier  |
@@ -64,7 +64,7 @@ infix_op_exponent = '^';
 infix_op_order = '<' | '<=' | '>' | '>=';
 infix_op_equality = '==' | '!=';
 infix_op_or = 'or';
-infox_op_and = 'and';
+infix_op_and = 'and';
 
 infix_op_multiply = '*' | '/' | '%';
 infix_op_additive = '+' | '-';
