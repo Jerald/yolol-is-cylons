@@ -60,7 +60,7 @@ How can you do one action if a number is even, and do a different action if a nu
 You can use an `if` statement, which looks like this:
 
 ```
-// If "1 + 1 == 2" is true, then set result to "good"
+// If 1 + 1 == 2 is true, then set result to "good"
 // Otherwise, set result to "bad"
 if 1 + 1 == 2 then result = "good" else result = "bad" end
 ```
