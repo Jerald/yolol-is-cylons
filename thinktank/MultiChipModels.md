@@ -4,7 +4,7 @@ Multiple Yolol chips can be set up to interact in different ways for two primary
 
 ### Functions
 
-A function can be moved to another chip and then invoked to do some work, while the function is running the calling chip is blocked.
+A function can be moved to another chip and then invoked to do some work, while the function is running on the other chip the calling chip is blocked (waiting for the result).
 
 This technique purely saves space and does not increase speed.
 
