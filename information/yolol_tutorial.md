@@ -6,6 +6,8 @@ This tutorial is intended for beginners, and will walk you through several basic
 
 You can practice YOLOL online using [Yoloxide](https://yoloxide.cylon.xyz/).
 
+**Note**: `//` indicates a **comment**, which explains code but doesn't do anything.
+
 ## Program: Hello world!
 
 **Goal**: Create and store the text `"Hello world!"`
@@ -58,9 +60,9 @@ How can you do one action if a number is even, and do a different action if a nu
 You can use an `if` statement, which looks like this:
 
 ```
-// If <condition> is true, then do <action>
-// Otherwise, do <other-action>
-if <condition> then <action> else <different-action> end
+// If "1 + 1 == 2" is true, then set result to "good"
+// Otherwise, set result to "bad"
+if 1 + 1 == 2 then result = "good" else result = "bad" end
 ```
 
 Let's pick a number to test.
@@ -105,7 +107,7 @@ You can use the `<` operator to check if `count` is less than `100`.
 
 ```
 count = 1
-if count < 100 then <do something> end
+if count < 100 then count = 100 end
 ```
 
 You can use the `+=` operator to add `1` to count.
