@@ -28,7 +28,7 @@ if :call == 0 then goto 1 end // Wait for function to be called
 
 A channel is a way to communicate between two running chips. Sending to a channel which already contains a value blocks until the channel is empty. Reading from a channel with no value blocks until the channel has an available value.
 
-This technique can save speed and provide modest speedups.
+This technique can save space and provide modest speedups.
 
 ### Unsynchronised Threads
 
