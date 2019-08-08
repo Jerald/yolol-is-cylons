@@ -18,7 +18,7 @@ result = :r1                                          // Fetch result
 ```
 
 ```
-//Chip 2
+// Chip 2
 if :call == 0 then goto 1 end // Wait for function to be called
 :result = :p1 + :p2 + :p3     // Execute function body, this can be as many lines as necessary
 :call = 0 goto 1              // Indicate that the function is complete
