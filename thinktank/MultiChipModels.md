@@ -32,9 +32,9 @@ This technique can save space and provide modest speedups.
 
 ### Unsynchronised Threads
 
-Each chip can be considered a separate thread, running at it's own speed. To effectively program with this model a memory model would need to be defined (e.g. what is the result of reading and writing multiple external variables in a single line) and a basic lock construct would be needed.
+Each chip can be considered a separate thread, running at its own speed.
 
-This is the simplest model to support for a language design perspective, but is likely the most complex to implement because it exposes the details of the yolol memory model.
+This is the simplest model to support for a language design perspective, but is likely the most complex to implement because it exposes the details of the yolol memory model. e.g. what is the result of reading and writing multiple external variables in a single line? a language compiled into this form would have to expose these details to the programmer.
 
 ### Pipelining
 
