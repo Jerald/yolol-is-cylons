@@ -38,7 +38,7 @@ This is the simplest model to support for a language design perspective, but is 
 
 ### Pipelining
 
-Each chip can be considered a single line of code, this does not reduce latency but can vastly increase throughput.
+Each chip can be considered a single line of code. This does not reduce latency but can vastly increase throughput. However, if chips are not guaranteed to update in lockstep this model is not guaranteed to produce correct results. It can act as a good approximate signal processor, but cannot be used as a general target for compiling code into.
 
 This example code reads a sensor, processes it and repeats that loop:
 
