@@ -31,9 +31,9 @@ SQRT A | Square root of A | Runtime Error
 SIN A | Sine of A (degrees) | Runtime Error
 COS A | Cosine of A (degrees) | Runtime Error
 TAN A | Tangent of A (degrees) | Runtime Error
-ARCSIN A | Inverse sine of A | Runtime Error
-ARCCOS A | Inverse cosine of A | Runtime Error
-ARCTAN A | Inverse tanent of A | Runtime Error
+ASIN A | Inverse sine of A | Runtime Error
+ACOS A | Inverse cosine of A | Runtime Error
+ATAN A | Inverse tanent of A | Runtime Error
 
 ### Logical operators
 |Operation | Numeric operation | String operation |
