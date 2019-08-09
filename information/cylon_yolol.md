@@ -46,7 +46,7 @@ Syntax errors result in the _line_ (not statement) being parsed to be completely
  * If a number underflows, it is set to MIN_VALUE.
  * The maximum length for a string is guaranteed to be at least 2^16 (`65536`) chars.
  * Division by `0` and `0 ^ -1` throw a runtime error.
- * `ARCSIN`/`ARCCOS` throw a runtime error when given any number not in [-1, 1].
+ * `ASIN`/`ACOS` throw a runtime error when given any number not in [-1, 1].
  * Trigonometric functions operate on degrees.
  * The first line in a chip is Line 1, and `GOTO 1` goes to it.
  * `GOTO N` goes to the `N`th line number. If `N` is a non-integer number, it is floored. `N` is then clamped to [1, 20].
