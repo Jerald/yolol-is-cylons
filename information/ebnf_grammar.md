@@ -53,7 +53,7 @@ comment = '//', { anything except a newline }, newline;
 assign_op = '=' | '+=' | '-=' | '*=' | '/=' | '%=';
 
 prefix_ident_op = '++' | '--';
-prefix_keyword_op = 'abs' | 'sqrt' | 'sin' | 'cos' | 'tan' | 'arcsin' | 'arccos' | 'arctan' | 'not';
+prefix_keyword_op = 'abs' | 'sqrt' | 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'not';
 prefix_op_neg = '-';
 
 postfix_ident_op = '++' | '--';
