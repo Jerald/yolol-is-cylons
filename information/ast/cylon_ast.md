@@ -117,7 +117,7 @@ A binary operation in yolol. The `operator` key is a string which contains the t
 A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. `operand` contains the expression that evaluates to the value that the operator is applied to.
 
 ### `expression::modify_op`
-**Required keys:** `operator: String`, `name: String`
+**Required keys:** `operator: String`, `name: expression::identifier`
 
 A modification operation in yolol (i.e. increment of decrement). The operator field contains either `pre-increment`, `post-increment`, `pre-decrement` or `post-decrement`. The name field specifies which variable is being modified.
 
