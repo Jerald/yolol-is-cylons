@@ -119,7 +119,7 @@ A unary operation in yolol. The `operator` key is a string which contains the te
 ### `expression::modify_op`
 **Required keys:** `operator: String`, `name: String`
 
-A modification operation in yolol (i.e. increment of decrement). The operator field contains either `++a`, `a++`, `--a` or `a--`. The name field specifies which variable is being modified.
+A modification operation in yolol (i.e. increment of decrement). The operator field contains either `pre-increment`, `post-increment`, `pre-decrement` or `post-decrement`. The name field specifies which variable is being modified.
 
 ### `expression::number`
 **Required keys:** `num: String`
