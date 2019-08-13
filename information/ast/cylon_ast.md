@@ -9,7 +9,7 @@
 > `Pyry#6210`  
 > `rad dude broham#2970`  
 
-**Version 0.3.0**
+**Version 1.1.0**
 
 To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
 
@@ -113,8 +113,11 @@ A binary operation in yolol. The `operator` key is a string which contains the t
 
 ### `expression::unary_op`
 **Required keys:** `operator: String`, `operand: Expression`
+**Optional keys:** `name: string`
 
 A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
+
+The increment/decrement operators do not apply to values and instead operate directly on variables. If the `operator` field is `a++`, `++a`, `a--` or `--a` then the name field should be set to the name of the variable being modified.
 
 ### `expression::number`
 **Required keys:** `num: String`
