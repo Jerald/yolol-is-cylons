@@ -114,7 +114,12 @@ A binary operation in yolol. The `operator` key is a string which contains the t
 ### `expression::unary_op`
 **Required keys:** `operator: String`, `operand: Expression`
 
-A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
+A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. `operand` contains the expression that evaluates to the value that the operator is applied to.
+
+### `expression::modify_op`
+**Required keys:** `operator: String`, `name: String`
+
+A modification operation in yolol (i.e. increment of decrement). The operator field contains either `++a`, `a++`, `--a` or `a--`. The name field specifies which variable is being modified.
 
 ### `expression::number`
 **Required keys:** `num: String`
