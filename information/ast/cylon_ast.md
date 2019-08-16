@@ -116,7 +116,7 @@ A wrapper for an expression wrapped in parenthesis. The `group` key contains sai
 ### `expression::binary_op::*`
 **Required keys:** `left: Node<expression>`, `right: Node<expression>`
 
-The group of operations which operate on two values. All subtypes have the same fields. `left` and `right` contain the expressions that evaluate to the left and right hand sides, respectively, of the operation.
+The group of operations which operate on two values. All subtypes have the same fields. `left` and `right` contain the expressions that evaluate to the left and right-hand sides, respectively, of the operation.
 
  - `expression::binary_op::add`
  - `expression::binary_op::subtract`
@@ -127,9 +127,9 @@ The group of operations which operate on two values. All subtypes have the same 
  - `expression::binary_op::and`
  - `expression::binary_op::or`
  - `expression::binary_op::greater_than`
- - `expression::binary_op::greater_than_equal_to`
+ - `expression::binary_op::greater_than_or_equal_to`
  - `expression::binary_op::less_than`
- - `expression::binary_op::less_than_equal_to`
+ - `expression::binary_op::less_than_or_equal_to`
  - `expression::binary_op::equal_to`
  - `expression::binary_op::not_equal_to`
 
