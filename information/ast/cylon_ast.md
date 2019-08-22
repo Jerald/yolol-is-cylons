@@ -147,8 +147,6 @@ The group of operations which operate on a single value. All subtypes have the s
  - `expression::unary_op::keyword::acos`
  - `expression::unary_op::keyword::atan`
 
-The "keyword" operator represents keyword based ops, for example `SIN`.
-
 ### `expression::modify_op::*`
 **Required keys:** `operand: Node<expression::identifier>`
 
