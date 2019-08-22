@@ -146,6 +146,7 @@ The group of operations which operate on a single value. All subtypes have the s
  - `expression::unary_op::keyword::asin`
  - `expression::unary_op::keyword::acos`
  - `expression::unary_op::keyword::atan`
+ - `expression::unary_op::keyword::not`
 
 ### `expression::modify_op::*`
 **Required keys:** `operand: Node<expression::identifier>`
