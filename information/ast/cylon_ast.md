@@ -139,14 +139,14 @@ The group of operations which operate on two values. All subtypes have the same 
 The group of operations which operate on a single value. All subtypes have the same fields. `operand` contains the expression that evaluates to the value that the operation is applied to.
 
  - `expression::unary_op::factorial`
- - `expression::unary_op::keyword::sqrt`
- - `expression::unary_op::keyword::sin`
- - `expression::unary_op::keyword::cos`
- - `expression::unary_op::keyword::tan`
- - `expression::unary_op::keyword::asin`
- - `expression::unary_op::keyword::acos`
- - `expression::unary_op::keyword::atan`
- - `expression::unary_op::keyword::not`
+ - `expression::unary_op::sqrt`
+ - `expression::unary_op::sin`
+ - `expression::unary_op::cos`
+ - `expression::unary_op::tan`
+ - `expression::unary_op::asin`
+ - `expression::unary_op::acos`
+ - `expression::unary_op::atan`
+ - `expression::unary_op::not`
 
 ### `expression::modify_op::*`
 **Required keys:** `operand: Node<expression::identifier>`
