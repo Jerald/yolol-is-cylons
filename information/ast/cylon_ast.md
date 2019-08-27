@@ -85,7 +85,7 @@ A goto statement. Contains the expression which evaluates to the destination lin
 An if statement. The `condition` key is the expression which evaluates to the control condition. `body` and `else_body` contain arrays of the statements to execute based on the `condition` value.
 
 ### `statement::assignment::*`
-**Required keys:** `identifier: Node<expression::identifier>`, `value: Node<Expression>`
+**Required keys:** `identifier: Node<expression::identifier>`, `value: Node<expression>`
 
 The group of operations which assign values to variables. All subtypes have the same fields. `identifier` is the variable being assigned. `value` contains the expression that evaluates to the value being assigned.
 
