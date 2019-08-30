@@ -1,3 +1,9 @@
+<h1 align="center">
+    <br>
+    <img src="meta/Cylon_logo_wide.png" href="https://discord.gg/rmu6aCr"></img>
+    <br>
+</h1>
+
 # yolol-is-cylons
 A collection of resources related to yolol, its community standards, and what we hope it can become.
 
