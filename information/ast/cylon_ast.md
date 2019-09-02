@@ -108,11 +108,6 @@ A wrapper around an expression type node. `expression` is the expression being w
 
 An expression in yolol. The `type` key dictates which kind of expression the node represents, and may contain one of the below sub-type names. The expression node will have other required keys as dictated by which sub-type the node is.
 
-### `expression::group`
-**Required keys:** `group: Node<expression>`
-
-A wrapper for an expression wrapped in parenthesis. The `group` key contains said wrapped expression.
-
 ### `expression::binary_op::*`
 **Required keys:** `left: Node<expression>`, `right: Node<expression>`
 
