@@ -1,0 +1,20 @@
+chipnumber=1 d=54*(chipnumber-1) p=256 :listwait=-1 goto 2
+i=:i-d j=i%6 x=(i-j)/6 w=:act=="set" goto 2+(i>=0)*(i<54)*(1+x+9*w)
+k=p^j :v=((m1/k)-(m1/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m2/k)-(m2/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m3/k)-(m3/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m4/k)-(m4/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m5/k)-(m5/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m6/k)-(m6/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m7/k)-(m7/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m8/k)-(m8/k)%1)%p :listwait=-1 goto 2
+k=p^j :v=((m9/k)-(m9/k)%1)%p :listwait=-1 goto 2
+k=p^j old=((m1/k)-(m1/k)%1)%p m1+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m2/k)-(m2/k)%1)%p m2+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m3/k)-(m3/k)%1)%p m3+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m4/k)-(m4/k)%1)%p m4+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m5/k)-(m5/k)%1)%p m5+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m6/k)-(m6/k)%1)%p m6+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m7/k)-(m7/k)%1)%p m7+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m8/k)-(m8/k)%1)%p m8+=(:v-old)*k :listwait=-1 goto 2
+k=p^j old=((m9/k)-(m9/k)%1)%p m9+=(:v-old)*k :listwait=-1 goto 2

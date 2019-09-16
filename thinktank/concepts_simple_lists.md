@@ -39,6 +39,24 @@ A multi-chip list is a extension of the single-chip list, with no theoretical li
 > **Using a multi-chip list**
 > A multi-chip list is used in exactly the same way as a single-chip list.
 
+### 8-bit multi-chip list
+A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip list, which supports storing only 8-bit values (integers between 0 and 255 inclusive).  As a tradeoff, it offers a higher density of words per chip -- this implementation can support up to 54 words for each chip.
+
+> [8-bit multi-chip indexed list code](/.scripts/lists_multi-chip-8bit-word-indexed-list.yolol)
+> 
+> <sub>This code is the code for the first chip of the system. For every additional chip, change the value of the `chipnumber` variable on line 1 of the script</sub>
+> <sub>All chips of the list must have their `:chipwait` field renamed to `:listwait`. In addition, this code uses the external variables `:i`, `:v` and `:act`, which must be defined.</sub>
+>
+> **Using a 8-bit multi-chip list**
+> A multi-chip list is used in exactly the same way as a single-chip list.
+
+#### Implementation notes
+
+- Each numeric variable in YOLOL has 64 bits, representing a fixed-precision decimal with 3 digits after the period.  The implementation included above does not scale the values up and down back to integers, instead using only the 54 bits that can be used in the integer representation.
+- Variables m1, m2, ..., m9 are used to pack multiple words into a single number.
+- When requesting a variable outside of the range of a given chip, the line 2 will spin in a loop (goto back to itself), without any side effects.
+- Values being written to the memory are *not* bounded -- you will get unspecified behavior if you set with value `:v` other than an integer between 0 and 255 inclusive.
+
 ### Memchip list
 Both the single-chip and multi-chip lists shown before use yolol variables to store the list values. However, in some circumstances, you may want the content of the list to be stored on a memory chip. The following implementation uses one Yolol chip for every memory chip used, each chip storing 10 items.
 > **Memory chip indexed list code:** [1st chip](./scripts/lists_single-chip-indexed-list.yolol), [2nd chip](./scripts/lists_single-chip-indexed-list.yolol) [3rd chip](./scripts/lists_single-chip-indexed-list.yolol)
