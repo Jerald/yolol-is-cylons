@@ -40,7 +40,7 @@ A multi-chip list is a extension of the single-chip list, with no theoretical li
 > A multi-chip list is used in exactly the same way as a single-chip list.
 
 ### 8-bit multi-chip list
-A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip list, which supports storing only 8-bit values (integers between 0 and 255 inclusive).  As a tradeoff, it offers a higher density of words per chip -- this implementation can support up to 54 words for each chip.
+A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip list, which supports storing only 8-bit values (integers between 0 and 255 inclusive).  As a tradeoff, it offers a higher density of words per chip -- this implementation can support up to 72 words for each chip.
 
 > [8-bit multi-chip indexed list code](/.scripts/lists_multi-chip-8bit-word-indexed-list.yolol)
 > 
@@ -52,7 +52,7 @@ A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip lis
 
 #### Implementation notes
 
-- Each numeric variable in YOLOL has 64 bits, representing a fixed-precision decimal with 3 digits after the period.  The implementation included above does not scale the values up and down back to integers, instead using only the 54 bits that can be used in the integer representation.
+- Each numeric variable in YOLOL has 64 bits, representing a fixed-precision decimal with 3 digits after the period.  The implementation included above does scale the values up and down back to integers, using all of the 64 bits that can be used in the integer representation.
 - Variables m1, m2, ..., m9 are used to pack multiple words into a single number.
 - When requesting a variable outside of the range of a given chip, the line 2 will spin in a loop (goto back to itself), without any side effects.
 - Values being written to the memory are *not* bounded -- you will get unspecified behavior if you set with value `:v` other than an integer between 0 and 255 inclusive.
