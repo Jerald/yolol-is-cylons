@@ -37,7 +37,18 @@ A multi-chip list is a extension of the single-chip list, with no theoretical li
 > <sub>All chips of the list must have their `:chipwait` field renamed to `:listwait`. In addition, this code uses the external variables `:i`, `:v` and `:act`, which must be defined.</sub>
 >
 > **Using a multi-chip list**
-> A multi-chip list is used in exactly the same way as a single-chip list.
+> A multi-chip list is used in exactly the same way as a single-chip list:
+>  
+>  | | Chip |
+>  |-|-|
+>  |1|*// fetch 1st and 23rd elements (indexes 0 and 22) of the list*|
+>  |2|*// assumes at least 2 multi-chips in the list, with chipnumber set to 1 and 2*|
+>  |3|:i=0 :act="get" :listwait=0 :chipwait=2|
+>  |4|a=:v :i=22 :act="get" :listwait=0 :chipwait=2|
+>  |5|b=:v|
+>  |6| |
+>  |7|*// set the value of the third element (index 2) of the list to the sum of the two elements read.*|
+>  |8|:i=2 :v=a+b :act="set" :listwait=0 :chipwait=2|
 
 ### 8-bit multi-chip list
 A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip list, which supports storing only 8-bit values (integers between 0 and 255 inclusive).  As a tradeoff, it offers a higher density of words per chip -- this implementation can support up to 72 words for each chip.
@@ -49,6 +60,17 @@ A 8-bit multi-chip list is a purpose-specific implementation of a multi-chip lis
 >
 > **Using a 8-bit multi-chip list**
 > A multi-chip list is used in exactly the same way as a single-chip list.
+>  
+>  | | Chip |
+>  |-|-|
+>  |1|*// fetch 1st and 23rd elements (indexes 0 and 22) of the list*|
+>  |2|*// only one chip is required*|
+>  |3|:i=0 :act="get" :listwait=0 :chipwait=2|
+>  |4|a=:v :i=22 :act="get" :listwait=0 :chipwait=2|
+>  |5|b=:v|
+>  |6| |
+>  |7|*// set the value of the third element (index 2) of the list to the sum of the two elements read modulo 256.*|
+>  |8|:i=2 :v=(a+b)%256 :act="set" :listwait=0 :chipwait=2|
 
 #### Implementation notes
 
