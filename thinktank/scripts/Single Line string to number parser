@@ -1,0 +1,15 @@
+Takes a single yolol cycle per digit to decode a number that has been converted to a string
+
+d: current digit
+r: input string
+n: current decoded digit
+e: accumulator for decoded number
+t: number base used (most likely base 10)
+j: which digit is being decoded, needs to be reset every new number
+
+Script starts at number 5, and progressively narrows down which digit is the one that has been extracted from the string
+each step adds or subtracts from the current "guess", by the end the correct digit is reached. The last add / subtract is rolled
+into e+=, which adds the decoded digit to 'e' accumulator. Goto is used to loop back to the same line. Loop is broken when the r
+input string is empty and r---r throws a runtime error
+
+d=r---r n=8-6*(d<5) n+=2*((d>n)-(d<n)) e+=(n+(d>n)-(d<n))*t^j++ goto 1
