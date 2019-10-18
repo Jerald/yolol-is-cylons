@@ -1,15 +1,23 @@
 Takes a single yolol cycle per digit to decode a number that has been converted to a string
 
-d: current digit
-r: input string
-n: current decoded digit
+s: string to test wether the current digit is odd
+d: current digit being decoded
+r: string being decoded
 e: accumulator for decoded number
-t: number base used (most likely base 10)
-j: which digit is being decoded, needs to be reset every new number
+t: number base (usually 10)
+j: digit counter
 
-Script starts at number 5, and progressively narrows down which digit is the one that has been extracted from the string
-each step adds or subtracts from the current "guess", by the end the correct digit is reached. The last add / subtract is rolled
-into e+=, which adds the decoded digit to 'e' accumulator. Goto is used to loop back to the same line. Loop is broken when the r
-input string is empty and r---r throws a runtime error
+First decodes to the lower even number, then adds one if the current digit is odd.
+Goto is used to loop back to the same line.
+Loop is broken if r input string is empty and r---r throws a runtime error
 
-d=r---r n=8-6*(d<5) n+=2*((d>n)-(d<n)) e+=(n+(d>n)-(d<n))*t^j++ goto 1
+
+Version if number is being decoded Least Significant Digit first //61 characters//
+
+s="13579x" //only has to be declared once, dont need to use this line again
+d=r---r e+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*t^j++ goto 2
+
+
+Version if number is decoded Most Significant Digit first //60 characters//
+s="13579"
+d=r---r e*=t e+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d)) goto 2
