@@ -14,11 +14,11 @@ Loop is broken if r input string is empty and r---r throws a runtime error
 
 Version if number is being decoded Least Significant Digit first //61 characters//
 
-s="13579x" //only has to be declared once, dont need to use this line again
+s="13579x t=10" //only has to be declared once, dont need to use this line again
 d=r---r e+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*t^j++ goto 2
 
 
 Version if number is decoded Most Significant Digit first //60 characters//
 
-s="13579x"
+s="13579x t=10"
 d=r---r e*=t e+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d)) goto 2
