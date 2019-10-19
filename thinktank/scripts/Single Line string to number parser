@@ -1,11 +1,12 @@
 Takes a single yolol cycle per digit to decode a number that has been converted to a string
 
-s: string to test wether the current digit is odd
+s: string to test wether the current digit is odd. Set to s="13579x" once before first run
 d: current digit being decoded
 r: string being decoded
-e: accumulator for decoded number
-t: number base (usually 10)
-j: digit counter
+e: accumulator for decoded number. Reset to 0 when starting to decode a new number
+t: number base (usually 10) Set before first run
+j: digit counter. Reset to appropriate value when starting to decode a new number
+                    usually 0, but can be -1, -2, or -3 depending on how many fractions are encoded
 
 First decodes to the lower even number, then adds one if the current digit is odd.
 Goto is used to loop back to the same line.
@@ -14,11 +15,9 @@ Loop is broken if r input string is empty and r---r throws a runtime error
 
 Version if number is being decoded Least Significant Digit first //61 characters//
 
-s="13579x" t=10 r=:input
 d=r---r e+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*t^j++ goto 2
 
 
 Version if number is decoded Most Significant Digit first //56 characters//
 
-s="13579x" t=10 r=:input
 d=r---r e=e*t+2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d) goto 2
