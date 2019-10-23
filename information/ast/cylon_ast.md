@@ -9,9 +9,9 @@
 > `Pyry#6210`  
 > `rad dude broham#2970`  
 
-**Version 0.3.0**
+**Version 1.0.0**
 
-To allow for interoperability between community yolol tools, we've designed the Cylon Yolol AST spec to provide a specification for what an abstract syntax tree (AST) of yolol should look like. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
+To allow for interoperability between community yolol tools, this document provides a specification for what an abstract syntax tree (AST) of yolol should look like encoded into JSON. This specification is something we hope all community yolol tools will follow, so that we can have all of our tools work together and make more awesome things than we could make alone.
 
 # Design goals
 
@@ -84,10 +84,17 @@ A goto statement. Contains the expression which evaluates to the destination lin
 
 An if statement. The `condition` key is the expression which evaluates to the control condition. `body` and `else_body` contain arrays of the statements to execute based on the `condition` value.
 
-### `statement::assignment`
-**Required keys:** `identifier: String`, `operator: String`, `value: Expression`
+### `statement::assignment::*`
+**Required keys:** `identifier: Node<expression::identifier>`, `value: Node<expression>`
 
-An assignment operation. `identifier` contains the name of the identifier to modify, prefixed by a colon if it's a data field. `operator` is a string which contains the textual representation (`+=` for example) of the actual operator being applied. `value` is an expression which evaluates to the value to be assigned.
+The group of operations which assign values to variables. All subtypes have the same fields. `identifier` is the variable being assigned. `value` contains the expression that evaluates to the value being assigned.
+
+ - `statement::assignment::assign`
+ - `statement::assignment::assign_add`
+ - `statement::assignment::assign_sub`
+ - `statement::assignment::assign_mul`
+ - `statement::assignment::assign_div`
+ - `statement::assignment::assign_mod`
 
 ### `statement::expression`
 **Required keys:** `expression: Node<expression>`
@@ -101,20 +108,57 @@ A wrapper around an expression type node. `expression` is the expression being w
 
 An expression in yolol. The `type` key dictates which kind of expression the node represents, and may contain one of the below sub-type names. The expression node will have other required keys as dictated by which sub-type the node is.
 
-### `expression::group`
-**Required keys:** `group: Node<expression>`
+### `expression::parentheses`
+**Required keys:** `inner: Node<expression>`
 
-A wrapper for an expression wrapped in parenthesis. The `group` key contains said wrapped expression.
+An expression in contained in parentheses.
 
-### `expression::binary_op`
-**Required keys:** `operator: string`, `left: Node<expression>`, `right: Node<expression>`
+### `expression::binary_op::*`
+**Required keys:** `left: Node<expression>`, `right: Node<expression>`
 
-A binary operation in yolol. The `operator` key is a string which contains the textual representation (`+` for example) of the actual operator being applied. `left` and `right` contain the expressions that evaluate to the left and right hand sides, respectively, of the operator.
+The group of operations which operate on two values. All subtypes have the same fields. `left` and `right` contain the expressions that evaluate to the left and right-hand sides, respectively, of the operation.
 
-### `expression::unary_op`
-**Required keys:** `operator: String`, `operand: Expression`
+ - `expression::binary_op::add`
+ - `expression::binary_op::subtract`
+ - `expression::binary_op::multiply`
+ - `expression::binary_op::divide`
+ - `expression::binary_op::exponent`
+ - `expression::binary_op::modulo`
+ - `expression::binary_op::and`
+ - `expression::binary_op::or`
+ - `expression::binary_op::greater_than`
+ - `expression::binary_op::greater_than_or_equal_to`
+ - `expression::binary_op::less_than`
+ - `expression::binary_op::less_than_or_equal_to`
+ - `expression::binary_op::equal_to`
+ - `expression::binary_op::not_equal_to`
 
-A unary operation in yolol. The `operator` key is a string which contains the textual representation (`-` for example) of the operator being applied. Due to the prefix/postfix operators being the same textually, they have the special representation of `++a` and `a++`, to use prefix/postfix increment as an example. `operand` contains the expression that evaluates to the value that the operator is applied to.
+### `expression::unary_op::*`
+**Required keys:** `operand: Node<expression>`
+
+The group of operations which operate on a single value. All subtypes have the same fields. `operand` contains the expression that evaluates to the value that the operation is applied to.
+
+ - `expression::unary_op::factorial`
+ - `expression::unary_op::sqrt`
+ - `expression::unary_op::sin`
+ - `expression::unary_op::cos`
+ - `expression::unary_op::tan`
+ - `expression::unary_op::asin`
+ - `expression::unary_op::acos`
+ - `expression::unary_op::atan`
+ - `expression::unary_op::not`
+ - `expression::unary_op::parentheses`
+ - `expression::unary_op::negate`
+
+### `expression::modify_op::*`
+**Required keys:** `operand: Node<expression::identifier>`
+
+The group of operations which modify a variable in place and return a value (such as `a++`). All subtypes have the same fields. `operand` contains the variable name that the operation modifies.
+
+ - `expression::modify_op::pre_increment`
+ - `expression::modify_op::post_increment`
+ - `expression::modify_op::pre_decrement`
+ - `expression::modify_op::post_decrement`
 
 ### `expression::number`
 **Required keys:** `num: String`
