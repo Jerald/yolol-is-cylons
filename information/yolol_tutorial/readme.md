@@ -3,8 +3,8 @@
 Welcome to this tutorial covering everything from the basics to optimization in YOLOL!<br>
 Over the course of the next few days and weeks new tutorials will be published not only here but on YouTube aswell!
 If you should have any questions arising while reading through the tutorial or watching the videos please feel free to 
-drop by in the [CYLON Discord Server](https://discord.gg/jkXcT74). We have a knowledgable group of people there who are
-always happy to answer questions!
+drop by in the [CYLON Discord Server](https://discord.gg/jkXcT74). There's a knowledgeable group of people there who are always 
+happy to answer questions!
 
 
 ## What you can expect to learn here:
