@@ -116,3 +116,14 @@ if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 *note: This is packed at 70 chars, so if you want to use it further down than line 9, you can store the 15 in a base placeholder like in version 1, giving you an extra character to work with!*
 ### Non-Integers
 I (Azur) will be working on implementing a style of [Decimal floating point](https://en.wikipedia.org/wiki/Decimal_floating_point "Wiki!") encoding. Essentially using two numbers with either a seperator or in different charsets to encode the number and then the offset for the deimal point.
+
+Initial attempt with +/- delimiter.
+```c
+i="6424-3" x=0
+c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
+n=o*x x=10^(o+10^--j) if c=="-" then x=1/x end j=0 o=0 goto 2+2*(i=="")
+```
+Output:
+``i="6424-3" -> n=6.424``
+``i="6424+3" -> n=6424000``
+//TODO: Explain
