@@ -6,14 +6,13 @@ Converting YOLOL Strings to numbers at one tick per digit
 
 ##### Table of Contents
 - [Abstract **(click here to just get code)**](#Abstract)
-- [Development & other versions](#The-Development-&-other-versions)
+- [Development and other versions](#The-Development-and-other-versions)
  - [Base 10 ints](#Base-10-ints)
    - [Version 1 (by Zijkhal)](#Version-1)
    - [Version 2 (by Azurethi)](#Version-2)
    - [Version 3 (by Zijkhal)](#Version-3)
  - [Base 15 ints](#Base-15-ints)
  - [Non-Integers (**Comming soon!**)](#Non-Integers)
-- [Concepts used](#Concepts-used)
 
 ## Abstract
 This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12342" would take 1 second to convert to a number in **o**)
@@ -30,7 +29,7 @@ c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 //Now o==12345 !!!
 ```
 
-## The Development & other versions
+## The Development and other versions
 ### Base 10 ints
 #### Version 1
 *By Zijkhal*
