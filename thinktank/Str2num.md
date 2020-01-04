@@ -31,6 +31,7 @@ c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 ```
 
 ## The Development and other versions
+*note: all versions will work with any base less than what they are designed for by just changing the number before ``^j++``. For bases less than 10, the base ten setup in the abstract (version 2) uses less variables than the base 15 & 16 versions. However, further optimiseations (such as parseing two characters at a time) could be made for smaller bases, but have yet to be worked on here*
 ### Base 10 ints
 #### Version 1
 *By Zijkhal*
@@ -122,7 +123,6 @@ A slight modification to the above code, using the two test sets as a binary sys
 i="1E240" o=0 j=0 x="FDB97531" y="FEBA7632" b="B"
 c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
 ```
-*note: all versions will work with any base less than what they are designed for by just changing the 16 (or 15) before ``^j++`` for bases less than 10, the base ten setup in the abstract (version 2) uses less variables, and further optimiseations (such as parseing two characters at a time) could be made for smaller bases, but have yet to be added here*
 
 ### Non-Integers
 I (Azur) will be working on implementing a style of [Decimal floating point](https://en.wikipedia.org/wiki/Decimal_floating_point "Wiki!") encoding. Essentially using two numbers with either a seperator or in different charsets to encode the number and then the offset for the deimal point.
