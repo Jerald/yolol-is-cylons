@@ -12,6 +12,7 @@ Converting YOLOL Strings to numbers at one tick per digit
    - [Version 2 (by Azurethi)](#Version-2)
    - [Version 3 (by Zijkhal)](#Version-3)
  - [Base 15 ints](#Base-15-ints)
+ - [Base 16 ints](#Base-16-ints)
  - [Non-Integers (**Comming soon!**)](#Non-Integers)
 
 ## Abstract
@@ -91,6 +92,8 @@ Unforunately, the super useful ±1 correction ``d+(c>d)-(c<d)`` cannot fit on th
 i="15AE" o=0 j=0 x="EDBA875421" y="EB852" b="B"
 c=i---i o+=(3*((c>2)+(c>5)+(c>8)+(c>b))+(x>x-c)+(y>y-c))*15^j++ goto 2
 ```
+*note: This is packed at 70 chars, so if you want to use it further down than line 9, you can store the 15 in a base placeholder like in version 1, giving you an extra character to work with!*
+
 After execution, o will contain 4664 (the decimal equivelant of 15AE in Pentadecimal)
 ```c
 //e=4664  (15AE)
@@ -111,8 +114,16 @@ if k==10 then o+="A" goto 2 else if o==11 then s+="B" goto 2 end end
 if k==12 then o+="C" goto 2 else if o==13 then s+="D" goto 2 end end
 if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 ```
+### Base 16 ints
+*By Azurethi (Reconstructed from **unknown**'s notes)*
+A slight modification to the above code, using the two test sets as a binary system (as opposed to the unary style in the base 15 section), allows for correcting up 0, 1, 2 or 3 (previously only 0, 1 or 2). Now that a map with a spacing of 4 can be used:
 
-*note: This is packed at 70 chars, so if you want to use it further down than line 9, you can store the 15 in a base placeholder like in version 1, giving you an extra character to work with!*
+```c
+i="1E240" o=0 j=0 x="FDB97531" y="FEBA7632" b="B"
+c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
+```
+*note: all versions will work with any base less than what they are designed for by just changing the 16 (or 15) before ``^j++`` for bases less than 10, the base ten setup in the abstract (version 2) uses less variables, and further optimiseations (such as parseing two characters at a time) could be made for smaller bases, but have yet to be added here*
+
 ### Non-Integers
 I (Azur) will be working on implementing a style of [Decimal floating point](https://en.wikipedia.org/wiki/Decimal_floating_point "Wiki!") encoding. Essentially using two numbers with either a seperator or in different charsets to encode the number and then the offset for the deimal point.
 
@@ -126,3 +137,5 @@ Output:
 ``i="6424-3" -> n=6.424``
 ``i="6424+3" -> n=6424000``
 //TODO: Explain
+
+*additional note: Since numbers in yolol are automatically rounded to 3dp, it prove more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
