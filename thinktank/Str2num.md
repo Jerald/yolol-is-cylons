@@ -139,3 +139,12 @@ Output:
 //TODO: Explain
 
 *additional note: Since numbers in yolol are automatically rounded to 3dp, it prove more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
+
+#### Any yolol number
+
+```c
+i="64.12"
+c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
+o=n n+=10^--j n/=10^j j=0 goto 2+2*(i=="")
+```
+//TODO: Explain
