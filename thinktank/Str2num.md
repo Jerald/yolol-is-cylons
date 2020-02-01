@@ -119,7 +119,7 @@ if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 *By Azurethi (Reconstructed from **unknown**'s notes)*
 A slight modification to the above code, using the two test sets as a binary system (as opposed to the unary style in the base 15 section), allows for correcting up 0, 1, 2 or 3 (previously only 0, 1 or 2). Now that a map with a spacing of 4 can be used:
 
-```c
+```vbnet
 i="1E240" o=0 j=0 x="FDB97531" y="FEBA7632" b="B"
 c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
 ```
