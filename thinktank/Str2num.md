@@ -116,7 +116,7 @@ if k==12 then o+="C" goto 2 else if o==13 then s+="D" goto 2 end end
 if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 ```
 ### Base 16 ints
-*By Azurethi (Reconstructed from **unknown**'s notes)*
+_By Azurethi (Reconstructed from **unknown**'s notes)_
 A slight modification to the above code, using the two test sets as a binary system (as opposed to the unary style in the base 15 section), allows for correcting up 0, 1, 2 or 3 (previously only 0, 1 or 2). Now that a map with a spacing of 4 can be used:
 
 ```vbnet
