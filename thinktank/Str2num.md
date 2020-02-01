@@ -24,7 +24,7 @@ Important variables:
 - **j** : *Current digit index* (will have string length after loop)
 
 **Important note: number after the goto must match it's line number (currently on line 2, therfore ``goto 2``)**
-```c
+```vbnet
 i="12345" o=0 j=0		//o & j don't have to be set on the first run, but must be reset after.
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 //Now o==12345 !!!
