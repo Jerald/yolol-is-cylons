@@ -13,7 +13,7 @@ Converting YOLOL Strings to numbers at one tick per digit
    - [Version 3 (by Zijkhal)](#Version-3)
  - [Base 15 ints](#Base-15-ints)
  - [Base 16 ints](#Base-16-ints)
- - [Non-Integers (**Comming soon!**)](#Non-Integers)
+ - [Non-Integers (**Coming soon!**)](#Non-Integers)
 
 ## Abstract
 This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12342" would take 1 second to convert to a number in **o**)
