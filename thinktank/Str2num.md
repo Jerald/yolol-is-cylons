@@ -128,7 +128,7 @@ c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
 I (Azur) will be working on implementing a style of [Decimal floating point](https://en.wikipedia.org/wiki/Decimal_floating_point "Wiki!") encoding. Essentially using two numbers with either a seperator or in different charsets to encode the number and then the offset for the deimal point.
 
 Initial attempt with +/- delimiter.
-```c
+```vbnet
 i="6424-3" x=0 e=""
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
 n=o*x x=10^(o+10^--j) if c=="-" then x=1/x end j=0 o=0 goto 2+2*(i==e)
