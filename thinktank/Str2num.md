@@ -50,7 +50,7 @@ This version uses a three step search to narrow down numerical value of each dig
 i="12345" o=0 j=0 t=10
 c=i---i d=8-6*(c<5) d+=2*((c>d)-(c<d)) o+=(d+(c>d)-(c<d))*b^j++ goto 2
 ```
-*note: **o** & **j** will default to 0 on te first run, and as such only need to be reset afterwards to parse other numbers*
+_note: **o** & **j** will default to 0 on the first run, and as such only need to be reset afterwards to parse other numbers_
 #### Version 2
 *By Azurethi*
 
