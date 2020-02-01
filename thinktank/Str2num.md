@@ -105,7 +105,7 @@ After execution, o will contain 4664 (the decimal equivelant of 15AE in Pentadec
 //                        = 4664
 ```
 #### Super simple base 10 -> 15 converter (just thrown together for testing)
-```c
+```vbnet
 i = 4664 o=""
 goto 2+(i-15^j++<0)
 j-- k=(i-(i%15^--j))/(15^j) i-=k*15^j goto 5+(k>9)
