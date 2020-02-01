@@ -23,7 +23,7 @@ A = B | Assignment (A to the value of B) | Assignment
 A += B | A = A + B | same
 A -= B | A = A - B | same
 A \*= B | A = A \* B | Runtime Error
-A /= B | A = A / B | Runtime Errorm
+A /= B | A = A / B | Runtime Error
 A %= B | A = A % B | Runtime Error
 ABS A | returns \|A\| | Runtime Error
 A! | Factorial | Runtime Error
