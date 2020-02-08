@@ -41,7 +41,7 @@ Syntax errors result in the _line_ (not statement) being parsed to be completely
 ## Semantics
 
  * The factorial operator (`!`) is guaranteed to be equal to the factorial function at nonnegative integers. Other inputs are either a runtime error if not supported, or may return a number using another function (Gamma, flooring, etc.).
- * The maximum value for a number is `922337203685477.5807` (MAX_VALUE) and the minimum value `-922337203685477.5808` (MIN_VALUE). Only four decimal digits of sub-integer precision are guaranteed.
+ * The maximum value for a number is `9223372036854775.807` ("MAX_VALUE" here) and the minimum value `-9223372036854775.808` ("MIN_VALUE" here). Only three decimal digits of sub-integer precision are guaranteed.
  * If a number overflows, it is set to MAX_VALUE.
  * If a number underflows, it is set to MIN_VALUE.
  * The maximum length for a string is guaranteed to be at least 2^16 (`65536`) chars.
@@ -90,3 +90,15 @@ Basic (`a = b`) and compound (`a += b`, etc.) assignment operators are a special
  * `a *= b`
  * `a /= b`
  * `a %= b`
+
+It is undefined to increment/decrement a temporary value or constant.
+
+## Multichip and Network Semantics
+
+Yolol network semantics are complicated. For every network, there are at least zero chips. For each chip, there are 20 lines. Chips push a "line run event" once every tick (assuming their `:chipwait` field is set to `0`; what this field does will be explained further). Networks flush their device queue once every tick as well. When a line run event is popped from the network device queue, the chip that pushed it has that line executed and the network's state (including chips' local variables) is updated in accordance with this line execution. This, in fact, makes lines atomic with respect to a network.
+
+This can cause some nondeterminism. How do I know Chip A's line will execute before or after Chip B's? Will it cause a data race? Will the world implode? Likely not, but these are interesting questions. Whether a chip will go before or after another chip when executing its line run event is known to be nondeterministic, and developers have very nearly confirmed that it's not necessarily true that the ordering will be preserved across network queue flushes.
+
+This also prevents breaking the 5Hz barrier. No matter what we do, networks flush their queue at 5Hz. We simply can't make it go any faster. And, if we did, it may very well be considered an exploit by FrozenByte.
+
+About `:ChipWait`: it changes how many _extra_ ticks go by until the next line run event is pushed to the network device queue. By default, it is `0`, meaning 0 extra ticks are simply waited through until the next line is executed. `1` implies a line is executed once per 2 ticks, etc. When it's set to a negative number, the chip stops executing.
