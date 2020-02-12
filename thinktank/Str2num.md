@@ -73,8 +73,8 @@ This version uses the mapping idea from V2 but instead maps all numbers to their
 While an extremely useful concept (utilised later to expand to base 15) this verson requiers the extra variable and line space to set up the test set.
 
 ```vbnet
-i="12345" o=0 j=0 b=10 s="02468"
-c=i---i o+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s!=s-c))*b^j++ goto 2
+i="12345" o=0 j=0 b=10 s="13579"
+c=i---i o+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s<s-c))*b^j++ goto 2
 ```
 ### Base 15 ints
 *By Azurethi*
