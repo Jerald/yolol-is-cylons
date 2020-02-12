@@ -1,6 +1,6 @@
 # String to number conversion
-*By [Azurethi](https://github.com/Azurethi "Adv. Mappings & Optimization") & [Zijkhal](https://github.com/Zijkhal "Initial Concept & Test sets")*
-*Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
+*By [Azurethi](https://github.com/Azurethi "Adv. Mappings & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept & Test sets"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
+
 ------------
 Converting YOLOL Strings to numbers at one tick per digit
 
