@@ -101,4 +101,4 @@ This can cause some nondeterminism. How do I know Chip A's line will execute bef
 
 This also prevents breaking the 5Hz barrier. No matter what we do, networks flush their queue at 5Hz. We simply can't make it go any faster. And, if we did, it may very well be considered an exploit by FrozenByte.
 
-About `:ChipWait`: it changes how many _extra_ ticks go by until the next line run event is pushed to the network device queue. By default, it is `0`, meaning 0 extra ticks are simply waited through until the next line is executed. `1` implies a line is executed once per 2 ticks, etc. When it's set to a negative number, the chip stops executing.
+About `:ChipWait`: it changes how many _extra_ ticks go by until the next line run event is pushed to the network device queue. By default, it is `0`, meaning 0 extra ticks are simply waited through until the next line is executed. `1` implies a line is executed once per 2 ticks, etc. When it's set to a negative number, the chip stops executing. When a string is put in, the chip doesn't wait. When non-integer numbers are put in, they're effectively floored.
