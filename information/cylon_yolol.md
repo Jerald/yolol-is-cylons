@@ -91,7 +91,7 @@ Basic (`a = b`) and compound (`a += b`, etc.) assignment operators are a special
  * `a /= b`
  * `a %= b`
 
-It is a parse error to even get in a situation where you can increment/decrement a temporary value or constant. This alleviates the need for the concepts of "lvalue"/"rvalue"/etc.
+It is a parse error to even get in a situation where you can increment/decrement a temporary value or constant.
 
 ## Multichip and Network Semantics
 
