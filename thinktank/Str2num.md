@@ -60,7 +60,7 @@ changes:
 
 This shorter version - at 64 chars instead of the 70 in V1 - allows use on lines >9. The additional space also frees up a variable as the base variable can just be written as a constant.
 
-An improved mapping is used which gives ``d=0 for c=[0,1]``, ``d=3 for c=[2,3,4]``, ``d=6 for c=[5,6,7]`` and ``d=7 for c=[8,9]``. Since all of these result in d being within ±1 of the true value of c, the second refinement step can be omitted & ``d+(c>d)-(c<d)`` can finalise the correct as before in V1.
+An improved mapping is used which gives ``d=0 for c=[0,1]``, ``d=3 for c=[2,3,4]``, ``d=6 for c=[5,6,7]`` and ``d=9 for c=[8,9]``. Since all of these result in d being within ±1 of the true value of c, the second refinement step can be omitted & ``d+(c>d)-(c<d)`` can finalise the correct as before in V1.
 ```vbnet
 i="12345" o=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
