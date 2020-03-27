@@ -26,8 +26,9 @@ Important variables:
 - **o** : *Output Number*
 - **j** : *Current digit index* (will have string length after loop)
 
-**Important note: number after the goto must match it's line number (currently on line 2, therfore ``goto 2``)**
-**Important note 2: o & j must be reset to 0 each time this code is run (already done for you in line 1)**
+**Important notes:**
+- **the number after the goto must match it's line number (currently on line 2, therfore ``goto 2``)**
+- **o & j must be reset to 0 each time this code is run (already done for you in line 1)**
 ```vbnet
 i="12345" o=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
@@ -41,8 +42,9 @@ Important variables:
 - **i** : *Input String*
 - **o** : *Output Number*
 
-**Important note: the goto statements must be modified to match the lines that this code is running on (see below code)**
-**Important note 2: n & j must be reset to 0 each time this code is run (already done for you in line 1)**
+**Important notes:**
+- **the goto statements must be modified to match the lines that this code is running on (see below code)**
+- **Important note 2: n & j must be reset to 0 each time this code is run (already done for you in line 1)**
 ```vbnet
 i="64.12" n=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
