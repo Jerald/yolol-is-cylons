@@ -6,16 +6,19 @@ Converting YOLOL Strings to numbers at one tick per digit
 
 ##### Table of Contents
 - [Abstract **(click here to just get code)**](#Abstract)
+  - [Integers](#Final-Version:-Integers)
+  - [Any Number](#Final-Version:-Universal)
 - [Development and other versions](#The-Development-and-other-versions)
- - [Base 10 ints](#Base-10-ints)
-   - [Version 1 (by Zijkhal)](#Version-1)
-   - [Version 2 (by Azurethi)](#Version-2)
-   - [Version 3 (by Zijkhal)](#Version-3)
- - [Base 15 ints](#Base-15-ints)
- - [Base 16 ints](#Base-16-ints)
- - [Non-Integers (**Coming soon!**)](#Non-Integers)
+  - [Base 10 ints](#Base-10-ints)
+    - [Version 1 (by Zijkhal)](#Version-1)
+    - [Version 2 (by Azurethi)](#Version-2)
+    - [Version 3 (by Zijkhal)](#Version-3)
+  - [Base 15 ints](#Base-15-ints)
+  - [Base 16 ints](#Base-16-ints)
+  - [Non-Integers](#Non-Integers)
 
 ## Abstract
+### Final Version: Integers
 This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12342" would take 1 second to convert to a number in **o**)
 
 Important variables:
@@ -24,11 +27,31 @@ Important variables:
 - **j** : *Current digit index* (will have string length after loop)
 
 **Important note: number after the goto must match it's line number (currently on line 2, therfore ``goto 2``)**
+**Important note 2: o & j must be reset to 0 each time this code is run (already done for you in line 1)**
 ```vbnet
-i="12345" o=0 j=0		//o & j don't have to be set on the first run, but must be reset after.
+i="12345" o=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 //Now o==12345 !!!
 ```
+
+### Final Version: Universal
+This code can be pasted in to any script, just ensure that none of the variables (i,n,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12.42" would take 1 second to convert to a number in **o**)
+
+Important variables:
+- **i** : *Input String*
+- **o** : *Output Number*
+
+**Important note: the goto statements must be modified to match the lines that this code is running on (see below code)**
+**Important note 2: n & j must be reset to 0 each time this code is run (already done for you in line 1)**
+```vbnet
+i="64.12" n=0 j=0
+c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
+o=n n+=10^--j n/=10^j j=0 goto 2+2*(i=="")         //Azurethi was here
+```
+
+Goto's to change, the numbers in **bold** must match the line number of the second line of the code (2, if this is pasted at the top of a chip):
+- On line 2: goto **2**+(c<0)
+- On line 3: goto **2**+2*(i=="")
 
 ## The Development and other versions
 *note: all versions will work with any base less than what they are designed for by just changing the number before ``^j++``. For bases less than 10, the base ten setup in the abstract (version 2) uses less variables than the base 15 & 16 versions. However, further optimiseations (such as parseing two characters at a time) could be made for smaller bases, but have yet to be worked on here*
@@ -129,22 +152,33 @@ I (Azur) will be working on implementing a style of [Decimal floating point](htt
 
 Initial attempt with +/- delimiter.
 ```vbnet
-i="6424-3" x=0 e=""
+i="6424-3" o=0 e="" j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
 n=o*x x=10^(o+10^--j) if c=="-" then x=1/x end j=0 o=0 goto 2+2*(i==e)
 ```
 Output:
 ``i="6424-3" -> n=6.424``
 ``i="6424+3" -> n=6424000``
-//TODO: Explain
 
-*additional note: Since numbers in yolol are automatically rounded to 3dp, it prove more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
+This is effectively just a version of [Scientific notation](https://en.wikipedia.org/wiki/Scientific_notation "Wiki!"). The first two lines of this code are a carbon copy of the v2 integer code. The exception is the ``+(c<0)`` term added to the goto statement, this causes the loop to jump one line forward when any character with an ascii value less than that of 0 (such as "-" or "+") is pulled from the input string.
+
+The third line then sets **x** to ten to the power of the current decoded value (the 3 from the examples, rem: strings are broken down right to left), inverting this if the character that stopped the loop on line one is "-". 
+Finally, line 3 resets the number parser in line two and jumps back into that loop if the end of the string has not been reached (detected by the i==e check).
+
+This parser then continues as normal until the end of the string is reached (detected by a decrement exception) then the start of line three multiplies the second output of the parser by the stored value in **x**, yielding the final number and then jumping to the next line (``goto 2+2*(i==e)``). (some extra computation is done as if this second value was the exponent, but this is not used).
+
+*additional note: Since numbers in yolol are automatically rounded to 3dp, it proves more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
 
 #### Any yolol number
 
 ```vbnet
-i="64.12"
+i="64.12" n=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
 o=n n+=10^--j n/=10^j j=0 goto 2+2*(i=="")
 ```
-//TODO: Explain
+This version works very similarly to the previous "Scientific notation" in that it is the very same V2 number parser, with the same ``+(c<0)`` modification. In this case however, the **+(c<0)** term is expected to be triggered by a "." in the string, causing the jump to line 3.
+
+The main difference is on line 3 where instead of using the currently stored value as an exponent, it is first corrected (it was multiplied by ``10^j++`` an extra time by the parser getting ready for the next iteration) then divided by ten to current number of characters parsed. This is results in an effective base 10 shift leaving the number <1 (the 12 from "64.12" becomes 0.12). 
+The parser is then restarted as normal, and given that it simply accumulates its final value, the extra starting value is completely ignored while it finishes off the rest of the string. 
+
+The same issue of "extra computation" from the previous version is still present in line three (it would try to shift the rest of the number <1) so the output is copied to another variable at the start of this line to prevent corruption. Finally, the same ``(i=="")`` check breaks the loop to the next line.
