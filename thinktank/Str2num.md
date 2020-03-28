@@ -72,7 +72,7 @@ variables:
 This version uses a three step search to narrow down numerical value of each digit. The final character of the string is extracted using ``c=i---i``, this is then initially compared to 5 using ``d=8-6*(c<5)``, resulting in mapping ``c=[0,1,2,3,4,5] to d=2`` and ``c=[6,7,8] to d=8``. This initial guess is then improved using ``d+=2*((c>d)-(c<d))`` which subtracts or adds two from the current guess if it is too high or low respectively. This new guess for each digit will be off by one at most. The last correction is done using ``d+(c>d)-(c<d)`` which will fix the "out by one" guesses, before they are multiplied by the base raised to the numbers position and accumulated in the output. Finally, ``goto 2`` loops back to the same line to repeat the process for the next digit, this loop is broken when the string is empty & ``c=i---i`` throws a runtime error.
 
 ```vbnet
-i="12345" o=0 j=0 t=10
+i="12345" o=0 j=0 b=10
 c=i---i d=8-6*(c<5) d+=2*((c>d)-(c<d)) o+=(d+(c>d)-(c<d))*b^j++ goto 2
 ```
 _note: **o** & **j** will default to 0 on the first run, and as such only need to be reset afterwards to parse other numbers_
