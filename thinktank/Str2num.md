@@ -46,9 +46,9 @@ Important variables:
 - **the goto statements must be modified to match the lines that this code is running on (see below code)**
 - **Important note 2: n & j must be reset to 0 each time this code is run (already done for you in line 1)**
 ```vbnet
-i="64.12" n=0 j=0
+i="-64.12" n=0 j=0
 c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
-o=n n+=10^--j n/=10^j j=0 goto 2+2*(i=="")         //Azurethi was here
+o=n*(1-2*(c<0))-(c<0)*10^--j n=1+n/10^j j=0 goto 2+2*(i=="")
 ```
 
 Goto's to change, the numbers in **bold** must match the line number of the second line of the code (2, if this is pasted at the top of a chip):
@@ -171,7 +171,7 @@ This parser then continues as normal until the end of the string is reached (det
 
 *additional note: Since numbers in yolol are automatically rounded to 3dp, it proves more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
 
-#### Any yolol number
+#### Any yolol +ve number
 
 ```vbnet
 i="64.12" n=0 j=0
@@ -184,3 +184,22 @@ The main difference is on line 3 where instead of using the currently stored val
 The parser is then restarted as normal, and given that it simply accumulates its final value, the extra starting value is completely ignored while it finishes off the rest of the string. 
 
 The same issue of "extra computation" from the previous version is still present in line three (it would try to shift the rest of the number <1) so the output is copied to another variable at the start of this line to prevent corruption. Finally, the same ``(i=="")`` check breaks the loop to the next line.
+
+#### Universal
+
+Added support for negatives
+
+```vbnet
+i="-64.12" n=0 j=0
+c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
+o=n*(1-2*(c<0))-(c<0)*10^--j n=1+n/10^j j=0 goto 2+2*(i=="")
+```
+Optimising the "Any +ve" version slightly allowed space for the new main attraction in line 2 ``o=n*(1-2*(c<0))-(c<0)*10^--j``. This negates the number when the last char is "ascii<0" (with apropriate correction for the parser parsing "-" as a digit = -1)
+
+In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V3 parser & carrying the (c<0) check across both lines. The V3 parser also parses "-" as 0 so no additional correction is needed when negating n.
+
+```vbnet
+i="12.34" o=0 j=0 b=10 s="97531"
+c=i---i n+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s>s-c))*b^j++ a=c<0 goto 2+a
+o=n*(1-2*a) n/=b^--j j=0 goto 2+2*(i=="")
+```
