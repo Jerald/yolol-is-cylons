@@ -17,7 +17,7 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
   - [Base 16 ints](#Base-16-ints)
   - [Non-Integers](#Non-Integers)
     - [Scientific notation](#Scientific-notation)
-    - [any positive yolol number](#Any-positive-yolol-number)
+    - [Any positive yolol number](#Any-positive-yolol-number)
     - [Universal **(Both optimisations)**](#Universal)
 
 ## Abstract
