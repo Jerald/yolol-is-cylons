@@ -6,19 +6,22 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
 
 ##### Table of Contents
 - [Abstract **(click here to just get code)**](#Abstract)
-  - [Integers](#Final-Version:-Integers)
-  - [Any Number](#Final-Version:-Universal)
+  - [Integers **(Variable Optimised)**](#Final-Version--Integers)
+  - [Universal **(Variable Optimised)**](#Final-Version--Universal)
 - [Development and other versions](#The-Development-and-other-versions)
   - [Base 10 ints](#Base-10-ints)
-    - [Version 1 (by Zijkhal)](#Version-1)
-    - [Version 2 (by Azurethi)](#Version-2)
-    - [Version 3 (by Zijkhal)](#Version-3)
+    - [Version 1](#Version-1)
+    - [Version 2 **(Variable Optimised)**](#Version-2)
+    - [Version 3 **(Character Optimised)**](#Version-3)
   - [Base 15 ints](#Base-15-ints)
   - [Base 16 ints](#Base-16-ints)
   - [Non-Integers](#Non-Integers)
+    - [Scientific notation](#Scientific-notation)
+    - [any +ve yolol number](#Any-+ve-yolol-number)
+    - [Universal **(Both optimisations)**](#Universal)
 
 ## Abstract
-### Final Version: Integers
+### Final Version- Integers
 This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process, plus one tick of overhead (eg. "1234" would take 1 second to convert to a number in **o**)
 
 Important variables:
@@ -35,7 +38,7 @@ c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 //Now o==12345 !!!
 ```
 
-### Final Version: Universal
+### Final Version- Universal
 This code can be pasted in to any script, just ensure that none of the variables (i,n,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per character, plus two ticks of overhead, plus one extra tick to process any decimal points (eg. "12.34" would take 1.6 second to convert to a number in **o**)
 
 Important variables:
@@ -152,6 +155,7 @@ c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
 ### Non-Integers
 I (Azur) will be working on implementing a style of [Decimal floating point](https://en.wikipedia.org/wiki/Decimal_floating_point "Wiki!") encoding. Essentially using two numbers with either a seperator or in different charsets to encode the number and then the offset for the deimal point.
 
+#### Scientific notation
 Initial attempt with +/- delimiter.
 ```vbnet
 i="6424-3" o=0 e="" j=0
@@ -171,7 +175,7 @@ This parser then continues as normal until the end of the string is reached (det
 
 *additional note: Since numbers in yolol are automatically rounded to 3dp, it proves more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
 
-#### Any yolol +ve number
+#### Any +ve yolol number
 
 ```vbnet
 i="64.12" n=0 j=0
