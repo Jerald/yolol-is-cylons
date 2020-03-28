@@ -17,7 +17,7 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
   - [Base 16 ints](#Base-16-ints)
   - [Non-Integers](#Non-Integers)
     - [Scientific notation](#Scientific-notation)
-    - [any +ve yolol number](#Any-+ve-yolol-number)
+    - [any positive yolol number](#Any-positive-yolol-number)
     - [Universal **(Both optimisations)**](#Universal)
 
 ## Abstract
@@ -175,7 +175,7 @@ This parser then continues as normal until the end of the string is reached (det
 
 *additional note: Since numbers in yolol are automatically rounded to 3dp, it proves more efficient to just multiply numbers by 1000 before converting to a string, and then divide them back after parsing*
 
-#### Any +ve yolol number
+#### Any positive yolol number
 
 ```vbnet
 i="64.12" n=0 j=0
