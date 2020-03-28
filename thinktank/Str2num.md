@@ -1,8 +1,8 @@
 # String to number conversion
-*By [Azurethi](https://github.com/Azurethi "Adv. Mappings & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept & Test sets"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
+*By [Azurethi](https://github.com/Azurethi "Adv. Mappings, Non-Ints & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept, Test sets & proofing"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
 
 ------------
-Converting YOLOL Strings to numbers at one tick per digit
+Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wrong & we can get your upgrades added here! :D)
 
 ##### Table of Contents
 - [Abstract **(click here to just get code)**](#Abstract)
@@ -19,7 +19,7 @@ Converting YOLOL Strings to numbers at one tick per digit
 
 ## Abstract
 ### Final Version: Integers
-This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12342" would take 1 second to convert to a number in **o**)
+This code can be pasted in to any script, just ensure that none of the variables (i,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process, plus one tick of overhead (eg. "1234" would take 1 second to convert to a number in **o**)
 
 Important variables:
 - **i** : *Input String*
@@ -36,7 +36,7 @@ c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
 ```
 
 ### Final Version: Universal
-This code can be pasted in to any script, just ensure that none of the variables (i,n,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per digit to process (eg. "12.42" would take 1 second to convert to a number in **o**)
+This code can be pasted in to any script, just ensure that none of the variables (i,n,o,j,c,d) are used elsewhere (or rename them all). It will take one yolol tick (200ms) per character, plus two ticks of overhead, plus one extra tick to process any decimal points (eg. "12.34" would take 1.6 second to convert to a number in **o**)
 
 Important variables:
 - **i** : *Input String*
@@ -136,8 +136,8 @@ goto 2+(i-15^j++<0)
 j-- k=(i-(i%15^--j))/(15^j) i-=k*15^j goto 5+(k>9)
 goto 9
 o+=k j=-1 goto 2
-if k==10 then o+="A" goto 2 else if o==11 then s+="B" goto 2 end end
-if k==12 then o+="C" goto 2 else if o==13 then s+="D" goto 2 end end
+if k==10 then o+="A" goto 2 else if k==11 then o+="B" goto 2 end end
+if k==12 then o+="C" goto 2 else if k==13 then o+="D" goto 2 end end
 if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 ```
 ### Base 16 ints
