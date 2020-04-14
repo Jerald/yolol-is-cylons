@@ -12,7 +12,7 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
   - [Base 10 positive ints](#Base-10-positive-ints)
     - [Version 1](#Version-1)
     - [Version 2 **(Variable Optimised)**](#Version-2)
-    - [Version 3](#Version-3)
+    - [Version 3 **(Balanced)**](#Version-3)
     - [Version 4 **(Character Optimised)**](#Version-4)
   - [Base 15 positive ints](#Base-15-positive-ints)
   - [Base 16 positive ints](#Base-16-positive-ints)
@@ -291,10 +291,10 @@ o=n*(1-2*(c<0))-(c<0)*10^--j n=1+n/10^j j=0 goto 2+2*(i=="")
 ```
 Optimising the "Any +ve" version slightly allowed space for the new main attraction in line 2 ``o=n*(1-2*(c<0))-(c<0)*10^--j``. This negates the number when the last char is "ascii<0" (with apropriate correction for the parser parsing "-" as a digit = -1)
 
-In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V3 parser & carrying the (c<0) check across both lines. The V3 parser also parses "-" as 0 so no additional correction is needed when negating n.
+In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V4 parser & carrying the (c<0) check across both lines. The V4 parser also parses "-" as 0 so no additional correction is needed when negating n.
 
 ```vbnet
-i="12.34" o=0 j=0 b=10 s="97531"
-c=i---i n+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s>s-c))*b^j++ a=c<0 goto 2+a
+i="14975" s="98743" t="98642" u="94321" b=10 o=0
+c=i---i n+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ a=c<0 goto 2+a
 o=n*(1-2*a) n/=b^--j j=0 goto 2+2*(i=="")
 ```
