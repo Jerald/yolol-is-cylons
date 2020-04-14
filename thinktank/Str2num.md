@@ -185,7 +185,7 @@ Another trick is that this requires the numbers to be decoded backwards, which s
 ```vbnet
 s="VTRPNLJHFDB97531" t="VURQNMJIFEBA7632" u="VUTSNMLKFEDC7654"
 v="VUTSRQPOFEDCBA98" o=0 i="0IO3"
-c=i---i o=o*32+16*(c>"f")+(s>s-c)+2*(t>t-c)+4*(u>u-c)+8*(v>v-c) goto 3
+c=i---i o=o*32+16*(c>"F")+(s>s-c)+2*(t>t-c)+4*(u>u-c)+8*(v>v-c) goto 3
 ```
 This will output o=123456, if i input string is left as is
 
@@ -228,7 +228,7 @@ The decoder is the same as the base 32 decoder, but the number base is changed f
 ```vbnet
 s="VTRPNLJHFDB97531" t="VURQNMJIFEBA7632" u="VUTSNMLKFEDC7654"
 v="VUTSRQPOFEDCBA98" o=0 i="89s3" b=-32
-c=i---i o=o*b+16*(c>"f")+(s>s-c)+2*(d>d-c)+4*(f>f-c)+8*(g>g-c) goto 3
+c=i---i o=o*b+16*(c>"F")+(s>s-c)+2*(d>d-c)+4*(f>f-c)+8*(g>g-c) goto 3
 ```
 This will output o=-69912, if i input is left as is
 
