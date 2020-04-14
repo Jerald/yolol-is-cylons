@@ -294,7 +294,7 @@ Optimising the "Any +ve" version slightly allowed space for the new main attract
 In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V4 parser & carrying the (c<0) check across both lines. The V4 parser also parses "-" as 0 so no additional correction is needed when negating n.
 
 ```vbnet
-i="14975" s="98743" t="98642" u="94321" b=10 o=0
+i="-64.12" s="98743" t="98642" u="94321" b=10 n=0 j=0
 c=i---i n+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ a=c<0 goto 2+a
 o=n*(1-2*a) n/=b^--j j=0 goto 2+2*(i=="")
 ```
