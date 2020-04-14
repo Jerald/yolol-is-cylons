@@ -9,12 +9,15 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
   - [Integers **(Variable Optimised)**](#Final-Version--Integers)
   - [Universal **(Variable Optimised)**](#Final-Version--Universal)
 - [Development and other versions](#The-Development-and-other-versions)
-  - [Base 10 ints](#Base-10-ints)
+  - [Base 10 positive ints](#Base-10-positive-ints)
     - [Version 1](#Version-1)
     - [Version 2 **(Variable Optimised)**](#Version-2)
-    - [Version 3 **(Character Optimised)**](#Version-3)
-  - [Base 15 ints](#Base-15-ints)
-  - [Base 16 ints](#Base-16-ints)
+    - [Version 3](#Version-3)
+    - [Version 4 **(Character Optimised)**](#Version-4)
+  - [Base 15 positive ints](#Base-15-positive-ints)
+  - [Base 16 positive ints](#Base-16-positive-ints)
+  - [Base 32 positive ints](#Base-32-positive-ints)
+  - [Base \-32 ints](#Base-\-32-ints)
   - [Non-Integers](#Non-Integers)
     - [Scientific notation](#Scientific-notation)
     - [Any positive yolol number](#Any-positive-yolol-number)
@@ -60,7 +63,8 @@ Goto's to change, the numbers in **bold** must match the line number of the seco
 
 ## The Development and other versions
 *note: all versions will work with any base less than what they are designed for by just changing the number before ``^j++``. For bases less than 10, the base ten setup in the abstract (version 2) uses less variables than the base 15 & 16 versions. However, further optimiseations (such as parseing two characters at a time) could be made for smaller bases, but have yet to be worked on here*
-### Base 10 ints
+### Base 10 positive ints
+These decoders can decode any non-negative base 10 integers
 #### Version 1
 *By Zijkhal*
 
@@ -72,7 +76,7 @@ variables:
 - **j** : *Current digit index*
 - **b** : *Placeholder for 10 (Needed the extra char)*
 
-This version uses a three step search to narrow down numerical value of each digit. The final character of the string is extracted using ``c=i---i``, this is then initially compared to 5 using ``d=8-6*(c<5)``, resulting in mapping ``c=[0,1,2,3,4,5] to d=2`` and ``c=[6,7,8] to d=8``. This initial guess is then improved using ``d+=2*((c>d)-(c<d))`` which subtracts or adds two from the current guess if it is too high or low respectively. This new guess for each digit will be off by one at most. The last correction is done using ``d+(c>d)-(c<d)`` which will fix the "out by one" guesses, before they are multiplied by the base raised to the numbers position and accumulated in the output. Finally, ``goto 2`` loops back to the same line to repeat the process for the next digit, this loop is broken when the string is empty & ``c=i---i`` throws a runtime error.
+This version uses a three step search to narrow down numerical value of each digit. The final character of the string is extracted using ``c=i---i``, this is then initially compared to 5 using ``d=8-6*(c<5)``, resulting in mapping ``c=[0,1,2,3,4] to d=2`` and ``c=[5,6,7,8,9] to d=8``. This initial guess is then improved using ``d+=2*((c>d)-(c<d))`` which subtracts or adds two from the current guess if it is too high or low respectively. This new guess for each digit will be off by one at most. The last correction is done using ``d+(c>d)-(c<d)`` which will fix the "out by one" guesses, before they are multiplied by the base raised to the numbers position and accumulated in the output. Finally, ``goto 2`` loops back to the same line to repeat the process for the next digit, this loop is broken when the string is empty & ``c=i---i`` throws a runtime error.
 
 ```vbnet
 i="12345" o=0 j=0 b=10
@@ -104,7 +108,17 @@ While an extremely useful concept (utilised later to expand to base 15) this ver
 i="12941" o=0 j=0 b=10 s="97531" 
 c=i---i o+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s>s-c))*b^j++ goto 2
 ```
-### Base 15 ints
+#### Version 4
+*By Zijkhal*
+
+This version makes full use of the **s** test introduced above. It mimics a base 8 string to number converter, but is offset by +1, so it maps  characters 1 through 8, and an additional correction is applied to get 9, while 0 being a default value. u>u-c also provides provides offset for values between 1 and 4 in addition to the correction when c is 9. Offset for digits 5 and above is built into 5*(c>4)
+
+```vbnet
+i="14975" s="98743" t="98642" u="94321" b=10 o=0
+c=i---i o+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ goto 2
+```
+
+### Base 15 positive ints
 *By Azurethi*
 
 In the interest of sending the most data in the least time, I've tried to crank up the base as much as possible. This will allow larger range for fewer digits, resulting in less processing time.
@@ -143,13 +157,90 @@ if k==10 then o+="A" goto 2 else if k==11 then o+="B" goto 2 end end
 if k==12 then o+="C" goto 2 else if k==13 then o+="D" goto 2 end end
 if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 ```
-### Base 16 ints
+### Base 16 positive ints
 _By Azurethi (Reconstructed from **unknown**'s notes)_
 A slight modification to the above code, using the two test sets as a binary system (as opposed to the unary style in the base 15 section), allows for correcting up 0, 1, 2 or 3 (previously only 0, 1 or 2). Now that a map with a spacing of 4 can be used:
 
 ```vbnet
 i="1E240" o=0 j=0 x="FDB97531" y="FEBA7632" b="B"
 c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
+```
+### Base 32 positive ints
+*By Zijkhal*
+
+This version makes heavy use of the **s** test, and maximizes use out of each test by making each consecutive test adjust the guess by twice as much as the previous one.
+
+Another trick is that this requires the numbers to be decoded backwards, which shortens the overall length of the decoder. Having the numbers encoded backwards also simplifies the encoder, resulting in a faster encoding as well!
+
+```vbnet
+s="VTRPNLJHFDB97531" t="VURQNMJIFEBA7632" u="VUTSNMLKFEDC7654"
+v="VUTSRQPOFEDCBA98" o=0 i="0IO3"
+c=i---i o=o*32+16*(c>"f")+(s>s-c)+2*(t>t-c)+4*(u>u-c)+8*(v>v-c) goto 3
+```
+This will output o=123456, if i input string is left as is
+
+*note: setting the test strings takes two lines, but they only need to be set on first run, the first line never has to be visited after that*
+*also note: The decoding line is fully packed at 70 characters, so to use it on lines > 9, store the number base (32) in a placeholder, and replace o=o*32+16*.... with o=o*b+16*... where b=32
+
+#### Simple base 10 -> base 32 encoder
+
+This encoder encodes base 32 digits between 0 and 9 in a single tick, and takes 2 ticks for values above 9. if n<1 then goto 14 end is used to break out of the encoding loop.
+
+```vbnet
+o="" n=123456 b=32
+if n<1 then goto 14 end d=n%b n=(n-d)/b o+=d goto 2+(d>9)*(d/2-4)
+o-- o-- if d==10 then o+="A" end if d==11 then o+="B" end goto 2
+o-- o-- if d==12 then o+="C" end if d==13 then o+="D" end goto 2
+o-- o-- if d==14 then o+="E" end if d==15 then o+="F" end goto 2
+o-- o-- if d==16 then o+="G" end if d==17 then o+="H" end goto 2
+o-- o-- if d==18 then o+="I" end if d==19 then o+="J" end goto 2
+o-- o-- if d==20 then o+="K" end if d==21 then o+="L" end goto 2
+o-- o-- if d==22 then o+="M" end if d==23 then o+="N" end goto 2
+o-- o-- if d==24 then o+="O" end if d==25 then o+="P" end goto 2
+o-- o-- if d==26 then o+="Q" end if d==27 then o+="R" end goto 2
+o-- o-- if d==28 then o+="S" end if d==29 then o+="T" end goto 2
+o-- o-- if d==30 then o+="U" end if d==31 then o+="V" end goto 2
+```
+**speed vs base 10**
+Decoding a base 32 number is on average roughly 50% faster than decoding a base 10 number.
+Encoding, however is instant for base 10 numbers because of the automatic type conversion from number to string yolol provides (string = number + ""), while the base 32 encoder takes up to 2 ticks per base 32 digits.
+The entire num -> str -> num path is roughly half as fast as base 10.
+
+This means that using base 32 is ideal for applications where compact storage of integers in strings is neccessary, especially if fast decoding of the stored values is desired, or for applications where decoding speed is way more important than encoding speed. If pure storage density is the only concern, then even higher number bases with a 2 tick per digit decoding cycle would be a better fit.
+
+### Base -32 ints
+*By Zijkhal*
+
+The use of a negative number base allows storing negative numbers without having to handle special characters, which enables to retain the single tick per base -32 digit decoding speed. Some numbers, however, are a digit or two longer in base -32 than in base 32, but most stay the same length.
+
+The decoder is the same as the base 32 decoder, but the number base is changed from 32 to -32. Due to having to use a placeholder for the number base, this version is "only" 69 characters per line, which enables use on lines > 9 without any modifications.
+
+```vbnet
+s="VTRPNLJHFDB97531" t="VURQNMJIFEBA7632" u="VUTSNMLKFEDC7654"
+v="VUTSRQPOFEDCBA98" o=0 i="89s3" b=-32
+c=i---i o=o*b+16*(c>"f")+(s>s-c)+2*(d>d-c)+4*(f>f-c)+8*(g>g-c) goto 3
+```
+This will output o=-69912, if i input is left as is
+
+#### Simple base 10 -> base -32 encoder
+
+This encoder is 1 tick slower per base -32 digit than the base 32 encoder, as the main loop is two lines instead of only one.
+
+```vbnet
+o="" b=-32 n=-69912
+if (abs n)<1 then goto 15 end d=n%b n/=b x=d<0 y=1-2*(n<0)
+n-=(n%y)-x d-=x*b o+=d goto 2+(d>9)*(d/2-3)
+o-- o-- if d==10 then o+="A" end if d==11 then o+="B" end goto 2
+o-- o-- if d==12 then o+="C" end if d==13 then o+="D" end goto 2
+o-- o-- if d==14 then o+="E" end if d==15 then o+="F" end goto 2
+o-- o-- if d==16 then o+="G" end if d==17 then o+="H" end goto 2
+o-- o-- if d==18 then o+="I" end if d==19 then o+="J" end goto 2
+o-- o-- if d==20 then o+="K" end if d==21 then o+="L" end goto 2
+o-- o-- if d==22 then o+="M" end if d==23 then o+="N" end goto 2
+o-- o-- if d==24 then o+="O" end if d==25 then o+="P" end goto 2
+o-- o-- if d==26 then o+="Q" end if d==27 then o+="R" end goto 2
+o-- o-- if d==28 then o+="S" end if d==29 then o+="T" end goto 2
+o-- o-- if d==30 then o+="U" end if d==31 then o+="V" end goto 2
 ```
 
 ### Non-Integers
