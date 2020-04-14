@@ -201,7 +201,7 @@ o-- o-- if d==26 then o+="Q" end if d==27 then o+="R" end goto 2
 o-- o-- if d==28 then o+="S" end if d==29 then o+="T" end goto 2
 o-- o-- if d==30 then o+="U" end if d==31 then o+="V" end goto 2
 ```
-**speed vs base 10**
+**speed vs base 10**\
 Decoding a base 32 number is on average roughly 50% faster than decoding a base 10 number.
 Encoding, however is instant for base 10 numbers because of the automatic type conversion from number to string yolol provides (string = number + ""), while the base 32 encoder takes up to 2 ticks per base 32 digits.
 The entire num -> str -> num path is roughly half as fast as base 10.
