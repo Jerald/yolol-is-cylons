@@ -121,6 +121,10 @@ c=i---i o+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ goto 2
 ### Base 15 positive ints
 *By Azurethi*
 
+
+Decodes non-negative base 15 integers
+
+
 In the interest of sending the most data in the least time, I've tried to crank up the base as much as possible. This will allow larger range for fewer digits, resulting in less processing time.
 
 The code below a modified version of my map from V2 & two test sets based on Zijkhals from V3. This map gives:
@@ -159,6 +163,9 @@ if k==14 then o+="E" goto 2 else o+="!" goto 2 end
 ```
 ### Base 16 positive ints
 _By Azurethi (Reconstructed from **unknown**'s notes)_
+
+Decodes non-negative base 16 integers
+
 A slight modification to the above code, using the two test sets as a binary system (as opposed to the unary style in the base 15 section), allows for correcting up 0, 1, 2 or 3 (previously only 0, 1 or 2). Now that a map with a spacing of 4 can be used:
 
 ```vbnet
@@ -167,6 +174,9 @@ c=i---i o+=(4*((c>3)+(c>7)+(c>b))+(x>x-c)+2*(y>y-c))*16^j++ goto 2
 ```
 ### Base 32 positive ints
 *By Zijkhal*
+
+
+Decodes non-negative base 32 integers
 
 This version makes heavy use of the **s** test, and maximizes use out of each test by making each consecutive test adjust the guess by twice as much as the previous one.
 
