@@ -1,5 +1,5 @@
 # String to number conversion
-*By [Azurethi](https://github.com/Azurethi "Adv. Mappings, Non-Ints & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept, Test sets & proofing, High number base parsers & Optimization"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
+*By [Azurethi](https://github.com/Azurethi "Adv. Mappings, Non-Ints & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept, Test sets, High number base parsers & Optimization"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
 
 ------------
 Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wrong & we can get your upgrades added here! :D)
