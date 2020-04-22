@@ -115,7 +115,7 @@ c=i---i o+=(2*((c>1)+(c>3)+(c>5)+(c>7))+(s>s-c))*b^j++ goto 2
 #### Version 4
 *By Zijkhal*
 
-This version makes full use of the **s** test introduced above. It mimics a base 8 string to number converter, but is offset by +1, so it maps  characters 1 through 8, and an additional correction is applied to get 9, while 0 being a default value. u>u-c also provides provides offset for values between 1 and 4 in addition to the correction when c is 9. Offset for digits 5 and above is built into 5*(c>4)
+This version makes full use of the test sets introduced above. It mimics a base 8 string to number converter, but is offset by +1, so it maps  characters 1 through 8, and an additional correction is applied to get 9, while 0 being a default value. u>u-c also provides provides offset for values between 1 and 4 in addition to the correction when c is 9. Offset for digits 5 and above is built into 5*(c>4)
 
 ```vbnet
 i="14975" s="98743" t="98642" u="94321" b=10 o=0
@@ -124,7 +124,7 @@ c=i---i o+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ goto 2
 #### Version 5
 *By Zijkhal*
 
-This version replaces all string tests in Version 4 with successive comparisons to the current guess, thus eliminating the need for extra variables at the cost of a few extra characters.
+This version replaces all test sets in Version 4 with successive comparisons to the current guess, thus eliminating the need for extra variables at the cost of a few extra characters.
 
 ```vbnet
 i="12345" o=0 j=0
@@ -133,7 +133,7 @@ c=i---i d=5*(c>4) d+=2*(c>d+1) d+=c>d d+=c>d o+=d*10^j++ goto 2
 #### Version 6
 *By Zijkhal*
 
-This version replaces the t and u test strings from Version 4 with successive comparisons to the current guess, making this version have even fewer characters.
+This version replaces the t and u test sets from Version 4 with successive comparisons to the current guess, making this version have even fewer characters.
 
 ```vbnet
 s="98743" i="12345" o=0 j=0 b=10
