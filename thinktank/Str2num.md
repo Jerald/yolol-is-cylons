@@ -11,9 +11,11 @@ Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wro
 - [Development and other versions](#The-Development-and-other-versions)
   - [Base 10 positive ints](#Base-10-positive-ints)
     - [Version 1](#Version-1)
-    - [Version 2 **(Variable Optimised)**](#Version-2)
-    - [Version 3 **(Balanced)**](#Version-3)
-    - [Version 4 **(Character Optimised)**](#Version-4)
+    - [Version 2](#Version-2)
+    - [Version 3](#Version-3)
+    - [Version 4](#Version-4)
+    - [Version 5 **(Variable Optimised)**](#Version-5)
+    - [Version 6 **(Character Optimised)**](#Version-6)
   - [Base 15 positive ints](#Base-15-positive-ints)
   - [Base 16 positive ints](#Base-16-positive-ints)
   - [Base 32 positive ints](#Base-32-positive-ints)
@@ -35,9 +37,10 @@ Important variables:
 **Important notes:**
 - **the number after the goto must match it's line number (currently on line 2, therfore ``goto 2``)**
 - **o & j must be reset to 0 each time this code is run (already done for you in line 1)**
+
 ```vbnet
 i="12345" o=0 j=0
-c=i---i d=3*((c>1)+(c>4)+(c>7)) o+=(d+(c>d)-(c<d))*10^j++ goto 2
+c=i---i d=5*(c>4) d+=2*(c>d+1) d+=c>d d+=c>d o+=d*10^j++ goto 2
 //Now o==12345 !!!
 ```
 
@@ -53,8 +56,9 @@ Important variables:
 - **Important note 2: n & j must be reset to 0 each time this code is run (already done for you in line 1)**
 ```vbnet
 i="-64.12" n=0 j=0
-c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
-o=n*(1-2*(c<0))-(c<0)*10^--j n=1+n/10^j j=0 goto 2+2*(i=="")
+c=i---i d=5*(c>4) d+=2*(c>d+1) d+=c>d d+=c>d o+=d*10^j++ goto 2+(c<0)
+o=n*(1-2*(c<0)) n/=b^--j j=0 goto 2+2*(i=="")
+//Now o==-64.12 !!!
 ```
 
 Goto's to change, the numbers in **bold** must match the line number of the second line of the code (2, if this is pasted at the top of a chip):
@@ -116,6 +120,24 @@ This version makes full use of the **s** test introduced above. It mimics a base
 ```vbnet
 i="14975" s="98743" t="98642" u="94321" b=10 o=0
 c=i---i o+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ goto 2
+```
+#### Version 5
+*By Zijkhal*
+
+This version replaces all string tests in Version 4 with successive comparisons to the current guess, thus eliminating the need for extra variables at the cost of a few extra characters.
+
+```vbnet
+i="12345" o=0 j=0
+c=i---i d=5*(c>4) d+=2*(c>d+1) d+=c>d d+=c>d o+=d*10^j++ goto 2
+```
+#### Version 6
+*By Zijkhal*
+
+This version replaces the t and u test strings from Version 4 with successive comparisons to the current guess, making this version have even fewer characters.
+
+```vbnet
+s="98743" i="12345" o=0 j=0 b=10
+c=i---i d=5*(c>4)+2*(s>s-c) d+=c>d d+=c>d n+=d*b^j++ goto 2
 ```
 
 ### Base 15 positive ints
@@ -296,15 +318,15 @@ Added support for negatives
 
 ```vbnet
 i="-64.12" n=0 j=0
-c=i---i d=3*((c>1)+(c>4)+(c>7)) n+=(d+(c>d)-(c<d))*10^j++ goto 2+(c<0)
-o=n*(1-2*(c<0))-(c<0)*10^--j n=1+n/10^j j=0 goto 2+2*(i=="")
+c=i---i d=5*(c>4) d+=2*(c>d+1) d+=c>d d+=c>d o+=d*10^j++ goto 2+(c<0)
+o=n*(1-2*(c<0)) n/=b^--j j=0 goto 2+2*(i=="")
 ```
-Optimising the "Any +ve" version slightly allowed space for the new main attraction in line 2 ``o=n*(1-2*(c<0))-(c<0)*10^--j``. This negates the number when the last char is "ascii<0" (with apropriate correction for the parser parsing "-" as a digit = -1)
+Optimising the "Any +ve" version slightly allowed space for the new main attraction in line 2 ``o=n*(1-2*(c<0))``. This negates the number when the last char is "ascii<0"
 
-In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V4 parser & carrying the (c<0) check across both lines. The V4 parser also parses "-" as 0 so no additional correction is needed when negating n.
+In the event you wish to add custom features, it may help to have more space on the last line, with this in mind we have also optimised for the fewest characters possible (above is fewest variables used) by switching to the V4 parser & carrying the (c<0) check across both lines.
 
 ```vbnet
-i="-64.12" s="98743" t="98642" u="94321" b=10 n=0 j=0
-c=i---i n+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ a=c<0 goto 2+a
+i="-64.12" s="98743" b=10 n=0 j=0
+c=i---i d=5*(c>4)+2*(s>s-c) d+=c>d d+=c>d n+=d*10^j++ a=c<0 goto 2+a
 o=n*(1-2*a) n/=b^--j j=0 goto 2+2*(i=="")
 ```
