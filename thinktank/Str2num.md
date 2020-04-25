@@ -1,5 +1,5 @@
 # String to number conversion
-*By [Azurethi](https://github.com/Azurethi "Adv. Mappings, Non-Ints & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept, Test sets, High number base parsers & Optimization"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
+*By [Azurethi](https://github.com/Azurethi "Adv. Mappings, Non-Ints & Optimization") and [Zijkhal](https://github.com/Zijkhal "Initial Concept, Adv. Mappings, Test sets & Optimization"), Special thanks to [Ocornoc](https://github.com/ocornoc "Formatting and typos") and [ColdiceEVO](https://github.com/coldiceEVO "Testing")*
 
 ------------
 Converting YOLOL Strings to numbers as fast as possible! (Let me know if I'm wrong & we can get your upgrades added here! :D)
@@ -122,7 +122,7 @@ i="14975" s="98743" t="98642" u="94321" b=10 o=0
 c=i---i o+=(5*(c>4)+2*(s>s-c)+(t>t-c)+(u>u-c))*b^j++ goto 2
 ```
 #### Version 5
-*By Zijkhal*
+*By Azurethi and Zijkhal (independently developed)*
 
 This version replaces all test sets in Version 4 with successive comparisons to the current guess, thus eliminating the need for extra variables at the cost of a few extra characters.
 
