@@ -139,6 +139,7 @@ The group of operations which operate on two values. All subtypes have the same 
 The group of operations which operate on a single value. All subtypes have the same fields. `operand` contains the expression that evaluates to the value that the operation is applied to.
 
  - `expression::unary_op::factorial`
+ - `expression::unary_op::abs`
  - `expression::unary_op::sqrt`
  - `expression::unary_op::sin`
  - `expression::unary_op::cos`
