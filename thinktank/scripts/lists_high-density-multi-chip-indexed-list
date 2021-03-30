@@ -35,4 +35,4 @@ Line12: --:CW if :RD then :R=f*y0+s*y1 else y0=s*y0+f*w y1=f*y1+s*w end goto 1
 Line16: --:CW if :RD then :R=f*y8+s*y9 else y8=s*y8+f*w y9=f*y9+s*w end goto 1
 Line17: --:CW if :RD then :R=f*z0+s*z1 else z0=s*z0+f*w z1=f*z1+s*w end goto 1
 ....
-Line20: --:CW if :RD then :R=f*v6+s*v7 else v6=s*v6+f*w v7=f*v7+s*w end goto 1
+Line20: --:CW if :RD then :R=f*z6+s*z7 else z6=s*z6+f*w z7=f*z7+s*w end goto 1
