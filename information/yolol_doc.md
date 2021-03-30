@@ -18,7 +18,7 @@ A / B | Division | Runtime Error
 A++ | PostIncrement | Appends a space to A post-operation
 ++A | PreIncrement | Appands a space to A pre-operation
 A\-\- | PorstDecrement | Removes the last character of A, Runtime Error when A == ""
-\-\-A | PreDecrement | Removes the last character of A, RuntimeError when A == ""
+\-\-A | PreDecrement | Removes the last character of A, Runtime Error when A == ""
 A = B | Assignment (A to the value of B) | Assignment
 A += B | A = A + B | same
 A -= B | A = A - B | same
