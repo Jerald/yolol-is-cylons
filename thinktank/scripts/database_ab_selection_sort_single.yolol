@@ -1,0 +1,30 @@
+Takes a tape database and its item start delimiter as inputs, outputs the same database sorted via selection sort. 
+Selection sort is Unstable and Alphabetical in this implementation. 
+Warning: It is recommended that all databases which wish to use this function have both a start and stop delimiter for each item.
+
+Variables (in the order they appear in the code):
+  - n : stands for New Cycle. Once the item from the unsorted list that is first Alphabetically is added to the sorted list
+        this flag is flipped to show that the loop is going to a the remaining unsorted list.
+  - db : stands for DataBase. This is used to keep track internally of the remaining list of unsorted items
+  - :input : external variable used to input a tape database into the function
+  - :output : external variable used to output the sorted list. it is built incrementally item by item. Recommendation would
+              be to watch the ChipWait variable of this chip to see when it finishes.
+  - d : internal variable for the start delimiter. 
+  - :delim : external variable used to input the start delimiter for items within the input tape database
+  - a : used to keep track of which items in the remaining unsorted list have not been checked this cycle
+  - h : current item being checked
+  - r : stands for Reverse, since it is the current item being checked in reverse order
+  - f : copy of a used in the loop to remove characters one at a time
+  - b : most recently removed letter from a
+  - c : copy of d used to check if b is a subset of d
+  - g : copy of r used in the loop to remove characters from r one a time so that h can be r in the correct order
+
+
+
+Line 1:  n=1 db=:input :output="" d=:delim
+Line 2:  a=db h="" r="" if db=="" then goto 7 end
+Line 3:  f=a a-- r+=f-a b=f-a c=d-b if c!=d then goto 5 end goto 3
+Line 4:  :output+=j n=1 db-=j a=db r="" if db=="" then goto 7 end goto 3
+Line 5:  if r!="" then g=r r-- h+=g-r else goto 6 end goto 5
+Line 6:  if n then n=0 j=h end if h<j then j=h end h-=h goto 3
+Line 7:  --:CW goto 1
