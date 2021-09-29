@@ -44,7 +44,7 @@ nota=0 :out=not a         -> 1
 a=3 :out=abs1+a           -> 3
 a=3 :out=abs 1+a          -> 4
 x=0 :out=notx             -> 1 
-x=0 :out=ifa              -> 0
+x=0 :out=ifx              -> 0
 x=0 :out=xor              -> 0
 orx=0 :out=x              -> 0
 ```
